@@ -1,0 +1,23 @@
+if [[ ! "$1" ]]; then
+  echo 'Enter a commit message.'
+  exit 1
+fi
+
+pushd ~/Documents/projects/bash
+
+
+cp ~/.bashrc ./
+cp ~/.bash_profile ./
+cp ~/.bash_aliases ./
+cp -R ~/bin ./
+cp ~/.gitconfig ./
+cp ~/.gitignore_global ./
+cp ~/.inputrc ./
+cp ~/.pryrc ./
+cp ~/.psqlrc ./
+cp ~/.mongorc.js ./
+cp ~/.pythonrc.py ./
+cp ~/.atom/* ./.atom
+git add .
+git commit -m "$1"
+git push origin master
