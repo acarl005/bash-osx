@@ -2,7 +2,7 @@
 alias cp='cp -iv'
 alias mv='mv -iv'
 alias mkdir='mkdir -pv'
-alias ll='ls -FGlAhp'
+alias ll='/bin/ls -FGlAhp'
 alias less='less -FSRXc'
 alias ..="cd .."
 alias ...="cd ../.."
@@ -43,3 +43,6 @@ alias nr="npm run"
 alias mon="~/Documents/projects/mongoose-model-cli/bin/mongoose-model-cli"
 
 alias u='echo -n `uuid` | pbcopy'
+
+alias etcbkp='rm -rf ~/etcd-backup && etcdctl backup --data-dir ~/default.etcd --backup-dir ~/etcd-backup && tar -C ~ -cvzf etcd-backup.tar.gz etcd-backup; ls ~/etcd-backup.tar.gz'
+alias etc='etcdctl'

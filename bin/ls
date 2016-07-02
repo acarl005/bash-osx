@@ -1,0 +1,11 @@
+#!/usr/bin/env ruby
+
+list = `/bin/ls`.split
+details = `/bin/ls -l`.split("\n")
+list.map! { |file|
+  details.any? { |line|
+    line.match(Regexp.new("^d.*#{file}$")) 
+  } ? "📂 \e[1;34m" + file + "\e[0m" : file
+}
+
+puts list.join('    ')
