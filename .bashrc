@@ -157,8 +157,8 @@ if [ -f ~/.bash_aliases ]; then
   . ~/.bash_aliases
 fi
 
-cd() { builtin cd "$@"; ll; }
-pushd() { builtin pushd "$@"; ll; }
+cd() { builtin cd "$@"; ls -A; }
+pushd() { builtin pushd "$@"; ls -A; }
 mkcd() { mkdir -p "$1" && cd "$1"; }
 te() { touch "$1"; e "$1"; }
 

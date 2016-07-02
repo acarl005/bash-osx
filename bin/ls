@@ -1,11 +1,25 @@
 #!/usr/bin/env ruby
 
-list = `/bin/ls`.split
-details = `/bin/ls -l`.split("\n")
+options = ARGV[0].match(/-([a-zA-Z]+)/)[1] rescue ''
+options.gsub!('l', '')
+
+list = `/bin/ls -#{options}p`.split("\n")
+details = `/bin/ls -#{options}pl`.split("\n")
 list.map! { |file|
   details.any? { |line|
     line.match(Regexp.new("^d.*#{file}$")) 
-  } ? "📂 \e[1;34m" + file + "\e[0m" : file
+  } ? "📂 " + file : "  " + file
 }
 
-puts list.join('    ')
+col_width = list.map(&:length).max + 2
+window_width = `tput cols`.chomp.to_i
+cols_per_row = window_width / col_width
+row = ""
+cols_per_row.times { 
+  row += "%-#{col_width}s" 
+}
+row += "\n"
+
+list.each_slice(cols_per_row) { |slice|
+  printf row, *slice.fill(' ', slice.length..cols_per_row)
+}
