@@ -5,15 +5,18 @@ options.gsub!('l', '')
 
 list = `/bin/ls -#{options}p`.split("\n")
 details = `/bin/ls -#{options}pl`.split("\n")
+exit if list.empty?
+
 list.map! { |file|
   details.any? { |line|
-    line.match(Regexp.new("^d.*#{file}$")) 
+    line.match(Regexp.new("^d.*#{Regexp.escape(file)}$")) 
   } ? "📂 " + file : "  " + file
 }
 
 col_width = list.map(&:length).max + 2
 window_width = `tput cols`.chomp.to_i
 cols_per_row = window_width / col_width
+cols_per_row = [cols_per_row, 1].max
 row = ""
 cols_per_row.times { 
   row += "%-#{col_width}s" 

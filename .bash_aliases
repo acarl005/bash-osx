@@ -1,8 +1,10 @@
 # some more aliases
+
 alias cp='cp -iv'
 alias mv='mv -iv'
 alias mkdir='mkdir -pv'
 alias ll='/bin/ls -FGlAhp'
+alias ls='ls -Gp'
 alias less='less -FSRXc'
 alias ..="cd .."
 alias ...="cd ../.."
@@ -32,12 +34,10 @@ export pg="/usr/local/var/postgres"
 alias gs="git s"
 alias dm="docker-machine"
 
-alias ni="npm install"
 alias nis="npm install --save"
 alias nisd="npm install --save-dev"
 alias ns="npm start"
 alias nsd="npm run start-dev"
-alias nt="npm test"
 alias nr="npm run"
 
 alias mon="~/Documents/projects/mongoose-model-cli/bin/mongoose-model-cli"
@@ -46,3 +46,4 @@ alias u='echo -n `uuid` | pbcopy'
 
 alias etcbkp='rm -rf ~/etcd-backup && etcdctl backup --data-dir ~/default.etcd --backup-dir ~/etcd-backup && tar -C ~ -cvzf etcd-backup.tar.gz etcd-backup; ls ~/etcd-backup.tar.gz'
 alias etc='etcdctl'
+alias sandbox-etc='etcdctl --ca-file ~/etcd-sandbox.cert --no-sync --peers "https://aws-us-east-1-portal.12.dblayer.com:10799,https://aws-us-east-1-portal.15.dblayer.com:11263" -u root:JZGSKAQDFQLPDBUZ'

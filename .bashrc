@@ -149,7 +149,8 @@ export GREP_OPTIONS='--color=always'
 
 
 # Set atom as the default editor
-[[ $(which atom) ]] && export EDITOR=atom
+# [[ $(which atom) ]] && export EDITOR=atom
+export EDITOR=vim
 
 
 # Alias definitions.
@@ -157,8 +158,8 @@ if [ -f ~/.bash_aliases ]; then
   . ~/.bash_aliases
 fi
 
-cd() { builtin cd "$@"; ls -A; }
-pushd() { builtin pushd "$@"; ls -A; }
+cd() { builtin cd "$@"; ll; }
+pushd() { builtin pushd "$@"; ll; }
 mkcd() { mkdir -p "$1" && cd "$1"; }
 te() { touch "$1"; e "$1"; }
 
