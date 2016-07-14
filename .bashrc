@@ -24,21 +24,11 @@ if brew --prefix git >/dev/null 2>&1; then
   PATH="$(brew --prefix git)/bin:$PATH"
 fi
 
-# Greet me with a triforce and other stuff
-echo -e "\033[1;93m           /\            "
-echo -e "          /  \           "
-echo -e "         /    \          "
-echo -e "        /      \         "
-echo -e "       /        \        "
-echo -e "      /__________\       "
-echo -e "     /\__________/\      "
-echo -e "    /  \        /  \     "
-echo -e "   /    \      /    \    "
-echo -e "  /      \    /      \   "
-echo -e " /        \  /        \  "
-echo -e "/__________\/__________\ "
-echo -e "\__________/\__________/ "
-echo -e "\033[0m"
+# Greet me with a mario and other stuff
+echo
+# If you don't have the mario command, you better `sudo npm install -g super-mario`
+mario
+echo
 echo "Welcome, $USER! It's $(date)."
 echo "You're logged in at $(hostname), using $OSTYPE."
 echo; echo
@@ -100,7 +90,8 @@ prompt="$gems"
 PROMPT_COMMAND='
 PS1="$(venv)$(format_pwd)$(git_prompt) ${prompt} ${c_reset} ";
 echo -ne "\033]0;$(basename $(pwd))\007";
-if [[ vim = $(history 1 | awk '"'"'{print $2}'"'"') ]] && [ -d .git ]; then
+LAST_COMMAND=$(history 1 | awk '"'"'{print $2}'"'"')
+if [[ vim = $LAST_COMMAND || vi = $LAST_COMMAND ]] && [ -d .git ]; then 
   git status --short
 fi'
 export PS2='... '
@@ -166,8 +157,8 @@ te() { touch "$1"; e "$1"; }
 if [[ $(which pygmentize) ]]; then
   # overwrite cat command so that it uses pygments instead
   cat() {
-    pygmentize $@ 2>/dev/null # silence errors
-    [[ $? != 0 ]] && /bin/cat $@ # if an error occurs, fall back to the regular cat
+    pygmentize "$@" 2>/dev/null # silence errors
+    [[ $? != 0 ]] && /bin/cat "$@" # if an error occurs, fall back to the regular cat
   }
 fi
 

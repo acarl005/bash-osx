@@ -5,7 +5,9 @@ alias mv='mv -iv'
 alias mkdir='mkdir -pv'
 alias ll='/bin/ls -FGlAhp'
 alias ls='ls -Gp'
+alias ccat='/bin/cat'
 alias less='less -FSRXc'
+alias rn='ranger --choosedir=$HOME/rangerdir; LASTDIR=`cat $HOME/rangerdir`; cd "$LASTDIR"'
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
@@ -14,7 +16,12 @@ alias rc='e ~/.bashrc'
 alias be="bundle exec"
 alias serv="python -m SimpleHTTPServer"
 alias chrome="open -a /Applications/Google\ Chrome.app/"
-alias e=atom
+alias e=$EDITOR
+# use installed version of vim instead of system default
+[[ -e /usr/local/bin/vim ]] && {
+  alias vim="/usr/local/bin/vim"
+  alias vi="/usr/local/bin/vim"
+}
 
 alias desk="pushd $HOME/Desktop"
 export desk="$HOME/Desktop"
@@ -43,6 +50,8 @@ alias nr="npm run"
 alias mon="~/Documents/projects/mongoose-model-cli/bin/mongoose-model-cli"
 
 alias u='echo -n `uuid` | pbcopy'
+
+alias jets=jest
 
 alias etcbkp='rm -rf ~/etcd-backup && etcdctl backup --data-dir ~/default.etcd --backup-dir ~/etcd-backup && tar -C ~ -cvzf etcd-backup.tar.gz etcd-backup; ls ~/etcd-backup.tar.gz'
 alias etc='etcdctl'
