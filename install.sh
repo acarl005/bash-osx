@@ -10,5 +10,6 @@ cp .pryrc ~/
 cp .psqlrc ~/
 cp .mongorc.js ~/
 cp .pythonrc.py ~/
+cp .vimrc ~/
 
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"

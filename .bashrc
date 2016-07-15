@@ -4,9 +4,26 @@
 # echo fs.inotify.max_user_watches=582222 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
 # ubuntu dark aubergine color: #2C001E rgb(45, 0, 30)
 
+# escaped color variables 
+c_reset='\[\e[0m\]'
+c_purple='\[\e[1;35m\]'
+c_cyan='\[\e[1;36m\]'
+c_blue='\[\e[0;36m\]'
+c_yellow='\[\e[1;93m\]'
+c_green='\[\e[1;32m\]'
+c_red='\[\e[1;31m\]'
+
+# raw color variables
+co_blue='\033[0;36m'
+co_yellow='\033[0;93m'
+co_red='\033[0;31m'
+co_reset='\033[0m'
 
 export NVM_DIR="/Users/andy/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/nvm.sh" ] && {
+  . "$NVM_DIR/nvm.sh"  # This loads nvm
+  export NODE_PATH="$HOME/.nvm/versions/node/$(node -v)/lib/node_modules" 
+}
 
 # set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/bin" ]; then
@@ -29,8 +46,8 @@ echo
 # If you don't have the mario command, you better `sudo npm install -g super-mario`
 mario
 echo
-echo "Welcome, $USER! It's $(date)."
-echo "You're logged in at $(hostname), using $OSTYPE."
+echo -e "Welcome, ${co_blue}$USER${co_reset}! It's ${co_red}$(date)${co_reset}."
+echo -e "You're logged in at ${co_blue}$(hostname)${co_reset}, using ${co_blue}$OSTYPE${co_blue}."
 echo; echo
 
 # Load git completions
@@ -50,22 +67,6 @@ if ! shopt -oq posix; then
   fi
 fi
 
-
-# A more colorful prompt
-# resets the color to default color
-c_reset='\[\e[0m\]'
-co_white='\e[0m'
-# sets the color to purple
-c_purple='\[\e[1;35m\]'
-# sets the color to cyan
-c_cyan='\[\e[1;36m\]'
-# sets the color to yellow
-c_yellow='\[\e[0;93m\]'
-# sets the color to green
-c_green='\[\e[1;32m\]'
-# sets the color to red
-c_red='\[\e[1;31m\]'
-co_red='\e[0;31m'
 
 gems="💎💎💎"
 christmas="🎁 🎁"
@@ -124,7 +125,7 @@ git_prompt() {
   if [[ $(git diff) ]]; then
     git_icon="${c_red}✗"
   elif [[ $(git status --short) ]]; then
-    git_icon="${c_yellow}📤"
+    git_icon="📤"
   else
     git_icon="${c_green}✓"
   fi
