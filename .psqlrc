@@ -9,7 +9,6 @@
 \timing
 
 -- Use best available output format
-\x auto
 \set VERBOSITY verbose
 \set HISTCONTROL ignoredups
 \set COMP_KEYWORD_CASE upper

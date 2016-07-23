@@ -48,7 +48,7 @@ mario
 echo
 echo -e "Welcome, ${co_blue}$USER${co_reset}! It's ${co_red}$(date)${co_reset}."
 echo -e "You're logged in at ${co_blue}$(hostname)${co_reset}, using ${co_blue}$OSTYPE${co_blue}."
-echo; echo
+echo
 
 # Load git completions
 git_completion_script=/usr/local/etc/bash_completion.d/git-completion.bash

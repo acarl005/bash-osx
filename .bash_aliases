@@ -3,7 +3,11 @@
 alias cp='cp -iv'
 alias mv='mv -iv'
 alias mkdir='mkdir -pv'
-alias ll='/bin/ls -FGlAhp'
+if [[ $(which color-ls) ]]; then
+  alias ll='color-ls -lroa'
+else
+  alias ll='/bin/ls -FGlAhp'
+fi
 alias ls='ls -Gp'
 alias ccat='/bin/cat'
 alias less='less -FSRXc'
@@ -14,6 +18,7 @@ alias ....="cd ../../.."
 alias al='e ~/.bash_aliases'
 alias rc='e ~/.bashrc'
 alias be="bundle exec"
+alias fr="foreman run"
 alias serv="python -m SimpleHTTPServer"
 alias chrome="open -a /Applications/Google\ Chrome.app/"
 alias e=$EDITOR

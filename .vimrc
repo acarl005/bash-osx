@@ -30,6 +30,8 @@ Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 " Plugin 'ascenator/L9', {'name': 'newL9'}
 
 Plugin 'jelera/vim-javascript-syntax'
+Plugin 'https://github.com/terryma/vim-multiple-cursors.git'
+Plugin 'tpope/vim-surround'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -52,6 +54,7 @@ set expandtab " convert tab to spaces
 set shiftwidth=2
 set softtabstop=2
 set relativenumber " line numbers are relative to where the cursor is
+set number
 set autoindent
 set smartindent
 set smartcase
@@ -71,3 +74,6 @@ set statusline+=%b,0x%-8B\                   " current char
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ra'
+
+" pretty format for a JSON file. just press =j
+nmap =j :%!python -m json.tool<CR>
