@@ -3,12 +3,6 @@
 alias cp='cp -iv'
 alias mv='mv -iv'
 alias mkdir='mkdir -pv'
-if [[ $(which ls-color) ]]; then
-  alias ll='ls-color -laiI'
-else
-  echo https://github.com/acarl005/color-ls
-  alias ll='/bin/ls -FGlAhp'
-fi
 alias ls='ls -Gp'
 alias ccat='/bin/cat'
 alias less='less -FSRXc'

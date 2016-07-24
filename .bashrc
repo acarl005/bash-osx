@@ -43,6 +43,11 @@ backg() {
 # set color back to normal
 reset='\033[0m'
 
+# print a message if a dependency is missing
+suggest() {
+  echo -e "$(backg 52)You can \033[4menhance\033[24m the experience by installing $(forg 51)$1$reset$(backg 52). Install here $(forg 199)$2$reset."
+}
+
 export NVM_DIR="/Users/andy/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && {
   . "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -89,7 +94,7 @@ else
   echo -e "[48;5;m  [0m[48;5;95m      [0m[48;5;33m            [0m[48;5;m            [0m"
   echo -e "[48;5;m  [0m[48;5;95m    [0m[48;5;m                          [0m"
   echo
-  echo https://github.com/dylanaraps/neofetch
+  suggest neofetch https://github.com/dylanaraps/neofetch
 fi
 
 # Load git completions
@@ -187,6 +192,12 @@ export GREP_OPTIONS='--color=always'
 # [[ $(which atom) ]] && export EDITOR=atom
 export EDITOR=vim
 
+if [[ $(which ls-color) ]]; then
+  alias ll='ls-color -laiI'
+else
+  suggest color-ls https://github.com/acarl005/color-ls
+  alias ll='/bin/ls -FGlAhp'
+fi
 
 # Alias definitions.
 if [ -f ~/.bash_aliases ]; then
@@ -205,7 +216,7 @@ if [[ $(which pygmentize) ]]; then
     [[ $? != 0 ]] && /bin/cat "$@" # if an error occurs, fall back to the regular cat
   }
 else
-  echo http://pygments.org/download/
+  suggest pygments http://pygments.org/download/
 fi
 
 
