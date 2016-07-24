@@ -3,9 +3,10 @@
 alias cp='cp -iv'
 alias mv='mv -iv'
 alias mkdir='mkdir -pv'
-if [[ $(which color-ls) ]]; then
-  alias ll='color-ls -lroa'
+if [[ $(which ls-color) ]]; then
+  alias ll='ls-color -laiI'
 else
+  echo https://github.com/acarl005/color-ls
   alias ll='/bin/ls -FGlAhp'
 fi
 alias ls='ls -Gp'

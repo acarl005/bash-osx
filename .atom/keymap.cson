@@ -4,6 +4,8 @@
   'alt-;': 'custom:semicolon-end'
   'alt-l': 'custom:semicolon-inside'
   'alt-x': 'custom:remove-block'
+  'ctrl-cmd-j': 'editor:move-line-down'
+  'ctrl-cmd-k': 'editor:move-line-up'
 
 'atom-text-editor':
   'ctrl-shift-M': 'bracket-matcher:select-inside-brackets'
