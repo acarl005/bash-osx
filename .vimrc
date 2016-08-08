@@ -19,7 +19,6 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'L9'
 " Git plugin not hosted on GitHub
 Plugin 'git://git.wincent.com/command-t.git'
-Plugin 'git://github.com/Townk/vim-autoclose.git'
 " git repos on your local machine (i.e. when working on your own plugin)
 " Plugin 'file:///home/gmarik/path/to/plugin'
 " The sparkup vim script is in a subdirectory of this repo called vim.
@@ -29,9 +28,11 @@ Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 " different version somewhere else.
 " Plugin 'ascenator/L9', {'name': 'newL9'}
 
-Plugin 'jelera/vim-javascript-syntax'
-Plugin 'https://github.com/terryma/vim-multiple-cursors.git'
-Plugin 'tpope/vim-surround'
+Plugin 'git://github.com/Townk/vim-autoclose.git' " auto add matching bracket or quote when you type one
+Plugin 'jelera/vim-javascript-syntax' " better js highlighting
+Plugin 'https://github.com/terryma/vim-multiple-cursors.git' " sublime-text-like mutli cursors
+Plugin 'tpope/vim-surround' " manipulates surrounding brackets and quotes
+Plugin 'kchmck/vim-coffee-script'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -49,7 +50,12 @@ filetype plugin indent on    " required
 " Put your non-Plugin stuff after this line
 
 syntax on
-colorscheme torte
+" Use dark color theme after 7pm and light color theme in the morning
+if strftime('%H') > 18
+  colorscheme torte
+else
+  colorscheme morning
+endif
 set expandtab " convert tab to spaces
 set shiftwidth=2
 set softtabstop=2
@@ -63,6 +69,7 @@ set clipboard=unnamed " the vim clipboard is be the same as the system clipboard
 set backspace=indent,eol,start " enable backspace button
 set scrolloff=15 " vim will automatically adjust viewport to leave at least 15 lines above and below cursor when possible
 set wildignore=*/node_modules/*,*.swp,*.zip
+set nofoldenable
 
 set laststatus=2 " always show the status bar
 set statusline=   " clear the statusline for when vimrc is reloaded "
@@ -70,10 +77,14 @@ set statusline=%t[%{strlen(&fenc)?&fenc:'none'},%{&ff}]%h%m%r%y%=%c,%l/%L\ %P
 set statusline+=%=                           " right align
 set statusline+=%b,0x%-8B\                   " current char
 
+
 " CtrlP options
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ra'
 
+" custom key mappings
+imap <nowait> <C-l> <C-c>O
 " pretty format for a JSON file. just press =j
 nmap =j :%!python -m json.tool<CR>
+

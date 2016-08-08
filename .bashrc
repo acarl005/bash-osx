@@ -70,7 +70,7 @@ if brew --prefix git >/dev/null 2>&1; then
   PATH="$(brew --prefix git)/bin:$PATH"
 fi
 
-if [[ $(which neofetch) ]]; then
+if [[ `which neofetch` ]]; then
   neofetch
 else
   # Greet me with a mario and other stuff
@@ -192,7 +192,7 @@ export GREP_OPTIONS='--color=always'
 # [[ $(which atom) ]] && export EDITOR=atom
 export EDITOR=vim
 
-if [[ $(which ls-color) ]]; then
+if [[ `which ls-color` ]]; then
   alias ll='ls-color -laiI'
 else
   suggest color-ls https://github.com/acarl005/color-ls
@@ -209,7 +209,7 @@ pushd() { builtin pushd "$@"; ll; }
 mkcd() { mkdir -p "$1" && cd "$1"; }
 te() { touch "$1"; e "$1"; }
 
-if [[ $(which pygmentize) ]]; then
+if [[ `which pygmentize` ]]; then
   # overwrite cat command so that it uses pygments instead
   cat() {
     pygmentize "$@" 2>/dev/null # silence errors
