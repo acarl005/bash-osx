@@ -25,11 +25,10 @@
   puch = push
   re = remote -v
   ci = commit --verbose
-  s = commit --dry-run --short
+  s = status --short
   ass = "!git add . ; git s"
   see = "!gitsee"
-  open = "!gitopen"
-  rr = "!gitrr"
+  rr = "!git ls-files -dz | xargs -0 git rm"
 
   # lg is now a shortcut for a pretty log with short commit messages
   # See the log manpage: https://www.kernel.org/pub/software/scm/git/docs/git-log.html

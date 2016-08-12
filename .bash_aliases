@@ -6,7 +6,7 @@ alias mkdir='mkdir -pv'
 alias ls='ls -Gp'
 alias ccat='/bin/cat'
 alias less='less -FSRXc'
-alias rn='ranger --choosedir=$HOME/rangerdir; LASTDIR=`cat $HOME/rangerdir`; cd "$LASTDIR"'
+alias rn='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR"'
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
@@ -40,6 +40,7 @@ export pg="/usr/local/var/postgres"
 
 alias gs="git s"
 alias dm="docker-machine"
+alias fm=foreman
 
 alias nis="npm install --save"
 alias nisd="npm install --save-dev"

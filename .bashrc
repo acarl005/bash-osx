@@ -70,6 +70,11 @@ if brew --prefix git >/dev/null 2>&1; then
   PATH="$(brew --prefix git)/bin:$PATH"
 fi
 
+# set java home
+if [[ `which java` ]]; then
+  export JAVA_HOME=`/usr/libexec/java_home`
+fi
+
 if [[ `which neofetch` ]]; then
   neofetch
 else
@@ -173,7 +178,7 @@ git_prompt() {
   if [[ $(git diff) ]]; then
     git_icon="$(color_esc 31)✗"
   elif [[ $(git status --short) ]]; then
-    git_icon="📤"
+    git_icon="$(color_esc 33)△"
   else
     git_icon="$(color_esc 32)✓"
   fi

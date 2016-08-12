@@ -33,6 +33,7 @@ Plugin 'jelera/vim-javascript-syntax' " better js highlighting
 Plugin 'https://github.com/terryma/vim-multiple-cursors.git' " sublime-text-like mutli cursors
 Plugin 'tpope/vim-surround' " manipulates surrounding brackets and quotes
 Plugin 'kchmck/vim-coffee-script'
+Plugin 'altercation/vim-colors-solarized'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -54,7 +55,7 @@ syntax on
 if strftime('%H') > 18
   colorscheme torte
 else
-  colorscheme morning
+  colorscheme pablo
 endif
 set expandtab " convert tab to spaces
 set shiftwidth=2

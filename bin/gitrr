@@ -1,8 +1,0 @@
-#!/usr/bin/env ruby
-
-status = `git status --short`
-removals = status.scan(/^.D\s(.*)$/)
-removals.each { |path|
-  system("git rm #{path[0]}")
-}
-system("git status --short")
