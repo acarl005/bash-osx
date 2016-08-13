@@ -50,7 +50,7 @@ filetype plugin indent on    " required
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
 
-syntax on
+syntax on " enable syntax highlighting
 " Use dark color theme after 7pm and light color theme in the morning
 if strftime('%H') > 18
   colorscheme torte
@@ -61,16 +61,17 @@ set expandtab " convert tab to spaces
 set shiftwidth=2
 set softtabstop=2
 set relativenumber " line numbers are relative to where the cursor is
-set number
+set number " line numbers
 set autoindent
 set smartindent
-set smartcase
+set ignorecase " searches are case insensitive
+set smartcase " searches become case sensitive when you enter capital letters
 set hlsearch " highlight the current search term
 set clipboard=unnamed " the vim clipboard is be the same as the system clipboard
 set backspace=indent,eol,start " enable backspace button
 set scrolloff=15 " vim will automatically adjust viewport to leave at least 15 lines above and below cursor when possible
 set wildignore=*/node_modules/*,*.swp,*.zip
-set nofoldenable
+set nofoldenable " disables code folding, because its confusing and I can't find decent docs on it
 
 set laststatus=2 " always show the status bar
 set statusline=   " clear the statusline for when vimrc is reloaded "
@@ -85,6 +86,7 @@ let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ra'
 
 " custom key mappings
+" when in insert mode, insert line above
 imap <nowait> <C-l> <C-c>O
 " pretty format for a JSON file. just press =j
 nmap =j :%!python -m json.tool<CR>

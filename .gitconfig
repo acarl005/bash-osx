@@ -29,23 +29,24 @@
   ass = "!git add . ; git s"
   see = "!gitsee"
   rr = "!git ls-files -dz | xargs -0 git rm"
+  logo = log --oneline
 
   # lg is now a shortcut for a pretty log with short commit messages
   # See the log manpage: https://www.kernel.org/pub/software/scm/git/docs/git-log.html
-
   lg = log \
     --graph \
     --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' \
     --abbrev-commit \
     --date=relative
 
-  logo = log --oneline
-
-
   # Edit the last commit
   amend= commit --verbose --amend
+
+
 [user]
-	name = Andrew Carlson
-	email = acarl005@g.ucla.edu
+  name = Andrew Carlson
+  email = acarl005@g.ucla.edu
+
+
 [credential]
-	helper = cache --timeout=36000
+  helper = cache --timeout=36000
