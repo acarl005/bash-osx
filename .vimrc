@@ -28,12 +28,15 @@ Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 " different version somewhere else.
 " Plugin 'ascenator/L9', {'name': 'newL9'}
 
-Plugin 'git://github.com/Townk/vim-autoclose.git' " auto add matching bracket or quote when you type one
+Plugin 'Townk/vim-autoclose.git' " auto add matching bracket or quote when you type one
 Plugin 'jelera/vim-javascript-syntax' " better js highlighting
-Plugin 'https://github.com/terryma/vim-multiple-cursors.git' " sublime-text-like mutli cursors
+Plugin 'terryma/vim-multiple-cursors' " sublime-text-like mutli cursors
 Plugin 'tpope/vim-surround' " manipulates surrounding brackets and quotes
-Plugin 'kchmck/vim-coffee-script'
-Plugin 'altercation/vim-colors-solarized'
+Plugin 'kchmck/vim-coffee-script' " coffeescript syntax highlighting
+Plugin 'scrooloose/syntastic' " inline syntax checker
+Plugin 'kana/vim-textobj-user' " plugin for defining custom text objects
+Plugin 'glts/vim-textobj-comment' " binds a text object to c for comments
+Plugin 'nelstrom/vim-textobj-rubyblock' " binds a text object to r for ruby blocks
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -57,6 +60,9 @@ if strftime('%H') > 18
 else
   colorscheme pablo
 endif
+
+runtime macros/matchit.vim
+
 set expandtab " convert tab to spaces
 set shiftwidth=2
 set softtabstop=2
@@ -73,12 +79,24 @@ set scrolloff=15 " vim will automatically adjust viewport to leave at least 15 l
 set wildignore=*/node_modules/*,*.swp,*.zip
 set nofoldenable " disables code folding, because its confusing and I can't find decent docs on it
 
+" configure the status line
 set laststatus=2 " always show the status bar
 set statusline=   " clear the statusline for when vimrc is reloaded "
 set statusline=%t[%{strlen(&fenc)?&fenc:'none'},%{&ff}]%h%m%r%y%=%c,%l/%L\ %P
 set statusline+=%=                           " right align
 set statusline+=%b,0x%-8B\                   " current char
 
+" syntastic options
+let g:syntastic_javascript_checkers = ['eslint']
+"let g:syntastic_mode_map = { "mode": "passive" }
+let g:jsx_ext_required = 0
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_always_populate_loc_list = 0
+let g:syntastic_auto_loc_list = 0
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
 
 " CtrlP options
 let g:ctrlp_map = '<c-p>'
