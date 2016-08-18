@@ -34,9 +34,11 @@ Plugin 'terryma/vim-multiple-cursors' " sublime-text-like mutli cursors
 Plugin 'tpope/vim-surround' " manipulates surrounding brackets and quotes
 Plugin 'kchmck/vim-coffee-script' " coffeescript syntax highlighting
 Plugin 'scrooloose/syntastic' " inline syntax checker
+
 Plugin 'kana/vim-textobj-user' " plugin for defining custom text objects
 Plugin 'glts/vim-textobj-comment' " binds a text object to c for comments
 Plugin 'nelstrom/vim-textobj-rubyblock' " binds a text object to r for ruby blocks
+Plugin 'michaeljsmith/vim-indent-object' " binds a text object to i for an indentation level (good for python)
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required

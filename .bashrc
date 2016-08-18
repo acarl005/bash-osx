@@ -72,7 +72,8 @@ fi
 
 # set java home
 if [[ `which java` ]]; then
-  export JAVA_HOME=`/usr/libexec/java_home`
+  #export JAVA_HOME=`/usr/libexec/java_home`
+  export JAVA_HOME=/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home
 fi
 
 if [[ `which neofetch` ]]; then
@@ -190,7 +191,7 @@ git_prompt() {
 export LSCOLORS=ExGxFxdxCxDxDxaccxaeex
 
 # Force grep to always use the color option and show line numbers
-export GREP_OPTIONS='--color=always'
+export GREP_OPTIONS='--color=auto'
 
 
 # Set atom as the default editor
@@ -223,6 +224,14 @@ if [[ `which pygmentize` ]]; then
 else
   suggest pygments http://pygments.org/download/
 fi
+
+docker-alias() {
+  ALIAS=`cat $HOME/.docker-aliases | grep -e "^$1"`
+  echo "Running the following command for alias \"$(echo $ALIAS | cut -d= -f1)\":"
+  COMMAND=`echo $ALIAS | cut -d= -f2`
+  echo $COMMAND
+  eval $COMMAND
+}
 
 
 #full recursive directory listing
