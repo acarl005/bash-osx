@@ -278,3 +278,4 @@ alias showBlocked='sudo ipfw list'                  # showBlocked:  All ipfw rul
 
 # load a config file for the python REPL
 export PYTHONSTARTUP=$HOME/.pythonrc.py
+

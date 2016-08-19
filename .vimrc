@@ -40,6 +40,8 @@ Plugin 'glts/vim-textobj-comment' " binds a text object to c for comments
 Plugin 'nelstrom/vim-textobj-rubyblock' " binds a text object to r for ruby blocks
 Plugin 'michaeljsmith/vim-indent-object' " binds a text object to i for an indentation level (good for python)
 
+Plugin 'reedes/vim-colors-pencil'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -56,11 +58,13 @@ filetype plugin indent on    " required
 " Put your non-Plugin stuff after this line
 
 syntax on " enable syntax highlighting
-" Use dark color theme after 7pm and light color theme in the morning
-if strftime('%H') > 18
-  colorscheme torte
+" Use dark color theme after 5pm and light color theme in the morning
+colorscheme pablo
+colorscheme pencil
+if strftime('%H') > 16
+  set background=dark
 else
-  colorscheme pablo
+  set background=light
 endif
 
 runtime macros/matchit.vim
