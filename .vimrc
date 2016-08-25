@@ -34,6 +34,12 @@ Plugin 'terryma/vim-multiple-cursors' " sublime-text-like mutli cursors
 Plugin 'tpope/vim-surround' " manipulates surrounding brackets and quotes
 Plugin 'kchmck/vim-coffee-script' " coffeescript syntax highlighting
 Plugin 'scrooloose/syntastic' " inline syntax checker
+Plugin 'kien/ctrlp.vim' " fuzzy searching for files
+
+" a pretty status line 
+" requires installation of this font package on OSX:
+" https://github.com/powerline/fonts
+Bundle 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 
 Plugin 'kana/vim-textobj-user' " plugin for defining custom text objects
 Plugin 'glts/vim-textobj-comment' " binds a text object to c for comments
@@ -41,6 +47,7 @@ Plugin 'nelstrom/vim-textobj-rubyblock' " binds a text object to r for ruby bloc
 Plugin 'michaeljsmith/vim-indent-object' " binds a text object to i for an indentation level (good for python)
 
 Plugin 'reedes/vim-colors-pencil'
+Plugin 'NLKNguyen/papercolor-theme'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -60,14 +67,25 @@ filetype plugin indent on    " required
 syntax on " enable syntax highlighting
 " Use dark color theme after 5pm and light color theme in the morning
 colorscheme pablo
-colorscheme pencil
+colorscheme PaperColor
 if strftime('%H') > 16
+  set background=dark
+elseif strftime('%H') < 7
   set background=dark
 else
   set background=light
 endif
 
+" a matching extension for things like ruby blocks
 runtime macros/matchit.vim
+
+set guifont=Inconsolata\ for\ Powerline:h15
+let g:Powerline_symbols = 'fancy'
+set encoding=utf-8
+set t_Co=256
+set fillchars+=stl:\ ,stlnc:\
+set term=xterm-256color
+set termencoding=utf-8
 
 set expandtab " convert tab to spaces
 set shiftwidth=2
@@ -87,10 +105,16 @@ set nofoldenable " disables code folding, because its confusing and I can't find
 
 " configure the status line
 set laststatus=2 " always show the status bar
-set statusline=   " clear the statusline for when vimrc is reloaded "
-set statusline=%t[%{strlen(&fenc)?&fenc:'none'},%{&ff}]%h%m%r%y%=%c,%l/%L\ %P
-set statusline+=%=                           " right align
-set statusline+=%b,0x%-8B\                   " current char
+
+" these manually configure a nice status line. they are not necessary when
+" powerline is installed
+"set statusline=   " clear the statusline for when vimrc is reloaded "
+"set statusline=%f " show filename
+"set statusline+=[%{strlen(&fenc)?&fenc:'none'},%{&ff}]  " show encoding
+"set statusline+=%h%m%r%y
+"set statusline+=%= " right align
+"set statusline+=%c,%l/%L@%P\  " show column, line, line-count, and percent from top of file
+"set statusline+=%b,0x%-8B\                   " current char
 
 " syntastic options
 let g:syntastic_javascript_checkers = ['eslint']

@@ -72,8 +72,7 @@ fi
 
 # set java home
 if [[ `which java` ]]; then
-  #export JAVA_HOME=`/usr/libexec/java_home`
-  export JAVA_HOME=/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home
+  export JAVA_HOME=`/usr/libexec/java_home`
 fi
 
 if [[ `which neofetch` ]]; then
@@ -155,7 +154,7 @@ format_pwd() {
   short_wd=${wd/\/Users\/andy/\~}
   first_char=$(echo $short_wd | cut -c 1-1)
   if [[ $first_char != '~' ]]; then
-    short_wd="${reset_esc}\e[0;0;40m💀 $(color_esc 35)${short_wd}${reset_esc}"
+    short_wd="${reset_esc}\[\e[0;0;40m\]💀 $(color_esc 35)${short_wd}${reset_esc}"
   fi
   echo -e "$(color_esc 35)${short_wd}"
 }
