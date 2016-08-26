@@ -19,6 +19,7 @@ cp ~/.mongorc.js ./
 cp ~/.pythonrc.py ./
 cp ~/.vimrc ./
 cp ~/.atom/* ./.atom
+defaults export com.googlecode.iterm2 ./iterm2.plist
 git add .
 git commit -m "$1"
 git push origin master

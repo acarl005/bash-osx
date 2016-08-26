@@ -23,5 +23,7 @@ cd !$
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 vim +PluginInstall +qall
 
+defaults import com.googlecode.iterm2 iterm2.plist
+
 # once atom is installed, run this:
 # apm install apathy-theme color-picker emmet file-icons highlight-selected language-ini linter linter-eslint pigments script terminal-plus vim-mode-plus
