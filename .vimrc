@@ -39,6 +39,7 @@ Plugin 'kien/ctrlp.vim' " fuzzy searching for files
 " a pretty status line 
 " requires installation of this font package on OSX:
 " https://github.com/powerline/fonts
+" this font must be chosen for the terminal as well
 Bundle 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 
 Plugin 'kana/vim-textobj-user' " plugin for defining custom text objects
