@@ -121,39 +121,18 @@ fi
 
 
 gems="💎💎💎"
-christmas="🎁 🎁"
-halloween="🎃 👻"
-new_years_eve="🎉 🎊"
-cinco_de_mayo="🍺🍸🍷"
-st_patricks_day="🍀 🍺"
-birthday="🎁 🎂 🎈"
-valentines="💚💙💜"
-
-prompt="$gems"
-[[ $(date +%e) = 14 && $(date +%m) = 2  ]] && prompt="$valentines"
-[[ $(date +%e) = 17 && $(date +%m) = 3  ]] && prompt="$st_patricks_day"
-[[ $(date +%e) = 5  && $(date +%m) = 5  ]] && prompt="$cinco_de_mayo"
-[[ $(date +%e) = 22 && $(date +%m) = 8  ]] && prompt="$birthday"
-[[ $(date +%e) = 31 && $(date +%m) = 10 ]] && prompt="$halloween"
-[[ $(date +%e) = 25 && $(date +%m) = 12 ]] && prompt="$christmas"
-[[ $(date +%e) = 31 && $(date +%m) = 12 ]] && prompt="$new_years_eve"
 
 # PROMPT_COMMAND is a variable whose value is some code that gets evaluated each time the prompt awaits input
 # PS1 is the variable for the prompt you see when terminal is awaiting input
 PROMPT_COMMAND='
-PS1="$(venv)$(format_pwd)$(git_prompt) ${prompt} ${reset_esc} ";
-echo -ne "\033]0;$(basename $(pwd))\007";
-LAST_COMMAND=$(history 1 | awk '"'"'{print $2}'"'"')
-if [[ vim = $LAST_COMMAND || vi = $LAST_COMMAND ]] && [ -d .git ]; then
-  git status --short
-fi'
+PS1="$(venv)$(format_pwd)$(git_prompt) ${gems} ${reset_esc} ";
+echo -ne "\033]0;$(basename $(pwd))\007";'
 export PS2='... '
 
 format_pwd() {
-  wd=$(pwd)
-  short_wd=${wd/\/Users\/andy/\~}
-  first_char=$(echo $short_wd | cut -c 1-1)
-  if [[ $first_char != '~' ]]; then
+  short_wd='\w'
+  # if we are not in the home directory, add a little warning
+  if [[ $(pwd) != "$HOME"* ]]; then
     short_wd="${reset_esc}\[\e[0;0;40m\]💀 $(color_esc 35)${short_wd}${reset_esc}"
   fi
   echo -e "$(color_esc 35)${short_wd}"
