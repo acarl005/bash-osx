@@ -35,6 +35,7 @@ Plugin 'tpope/vim-surround' " manipulates surrounding brackets and quotes
 Plugin 'kchmck/vim-coffee-script' " coffeescript syntax highlighting
 Plugin 'scrooloose/syntastic' " inline syntax checker
 Plugin 'kien/ctrlp.vim' " fuzzy searching for files
+Plugin 'Yggdroot/indentLine'
 
 " a pretty status line 
 " requires installation of this font package on OSX:
@@ -121,9 +122,6 @@ set laststatus=2 " always show the status bar
 let g:syntastic_javascript_checkers = ['eslint']
 "let g:syntastic_mode_map = { "mode": "passive" }
 let g:jsx_ext_required = 0
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
 let g:syntastic_always_populate_loc_list = 0
 let g:syntastic_auto_loc_list = 0
 let g:syntastic_check_on_open = 1
