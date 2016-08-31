@@ -135,6 +135,18 @@ let g:ctrlp_working_path_mode = 'ra'
 " custom key mappings
 " when in insert mode, insert line above
 imap <nowait> <C-l> <C-c>O
+" insert console.log
+imap <nowait> ç console.log()<C-c>i
+" edit the .vimrc
+nmap <nowait> √ :tabe ~/.vimrc
 " pretty format for a JSON file. just press =j
 nmap =j :%!python -m json.tool<CR>
+
+:command Dedent call Dedent()
+function! Dedent()
+  set ts=4 sts=4 noet
+  retab!
+  set ts=2 sts=2 et
+  retab
+endfunction
 
