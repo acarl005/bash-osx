@@ -145,7 +145,7 @@ generate_prompt() {
   if [[ -z $GIT_STR ]]; then
     PROMPT_STR="$PROMPT_STR$(fg_esc $DIR_BG)"
   else
-    PROMPT_STR="$PROMPT_STR$(fg_bg_esc $DIR_BG $GIT_BG)$(fg_bg_esc 255 $GIT_BG) $GIT_STR $(fg_esc $GIT_BG)"
+    PROMPT_STR="$PROMPT_STR$(fg_bg_esc $DIR_BG $GIT_BG)$(fg_bg_esc 255 $GIT_BG) $GIT_STR $(fg_esc $GIT_BG)"
   fi
   echo $PROMPT_STR
 }
