@@ -127,7 +127,7 @@ generate_prompt() {
   GIT_BG=
   GIT_STR=
   if git rev-parse --git-dir > /dev/null 2>&1; then
-    GIT_STR=$(__git_ps1)
+    GIT_STR=$(__git_ps1 | sed 's/ (\(.*\))$/\1/')
     if [[ $(git diff) ]]; then
       GIT_BG=88
     elif [[ $(git status --short) ]]; then
