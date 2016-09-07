@@ -30,12 +30,16 @@ Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 
 Plugin 'Townk/vim-autoclose.git' " auto add matching bracket or quote when you type one
 Plugin 'jelera/vim-javascript-syntax' " better js highlighting
+Plugin 'elzr/vim-json' " better json highlighting 
 Plugin 'terryma/vim-multiple-cursors' " sublime-text-like mutli cursors
 Plugin 'tpope/vim-surround' " manipulates surrounding brackets and quotes
 Plugin 'kchmck/vim-coffee-script' " coffeescript syntax highlighting
 Plugin 'scrooloose/syntastic' " inline syntax checker
 Plugin 'kien/ctrlp.vim' " fuzzy searching for files
-Plugin 'Yggdroot/indentLine'
+Plugin 'Yggdroot/indentLine' " adds a little grey line at each indentation level
+Plugin 'airblade/vim-gitgutter'
+Plugin 'scrooloose/nerdcommenter' " adds keybindings for easily commenting out lines \c<space> to toggle
+Plugin 'AndrewRadev/splitjoin.vim'
 
 " a pretty status line 
 " requires installation of this font package on OSX:
@@ -48,7 +52,6 @@ Plugin 'glts/vim-textobj-comment' " binds a text object to c for comments
 Plugin 'nelstrom/vim-textobj-rubyblock' " binds a text object to r for ruby blocks
 Plugin 'michaeljsmith/vim-indent-object' " binds a text object to i for an indentation level (good for python)
 
-Plugin 'reedes/vim-colors-pencil'
 Plugin 'NLKNguyen/papercolor-theme'
 
 " All of your Plugins must be added before the following line
@@ -131,6 +134,10 @@ let g:syntastic_check_on_wq = 0
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ra'
+
+" dont hide double quotes using vim-json
+set conceallevel=0
+let g:vim_json_syntax_conceal = 0
 
 " custom key mappings
 " when in insert mode, insert line above

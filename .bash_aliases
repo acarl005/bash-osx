@@ -48,7 +48,6 @@ alias ns="npm start"
 alias nsd="npm run start-dev"
 alias nr="npm run"
 
-alias mon="~/Documents/projects/mongoose-model-cli/bin/mongoose-model-cli"
 
 alias u='echo -n `uuid` | pbcopy'
 
