@@ -117,6 +117,9 @@ generate_prompt() {
   if [[ $DOCKER_MACHINE_NAME ]]; then
     ENV_STR="${ENV_STR}🐳 "
   fi
+  if [ ! -z $rvm_bin_path ]; then
+    ENV_STR="${ENV_STR}💎 "
+  fi
 
   DIR_BG=54
   DIR_FG=255

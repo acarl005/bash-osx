@@ -142,12 +142,16 @@ let g:vim_json_syntax_conceal = 0
 " custom key mappings
 " when in insert mode, insert line above
 imap <nowait> <C-l> <C-c>O
-" insert console.log
+" insert console.log (alt+c)
 imap <nowait> ç console.log()<C-c>i
-" edit the .vimrc
-nmap <nowait> √ :tabe ~/.vimrc
+" edit the .vimrc (alt+v)
+nmap <nowait> √ :tabe ~/.vimrc<CR>
 " pretty format for a JSON file. just press =j
 nmap =j :%!python -m json.tool<CR>
+" open new tab
+map <nowait> <C-t> :tabe<CR>
+" remove all trailing whitespace
+nnoremap <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
 
 :command Dedent call Dedent()
 function! Dedent()
