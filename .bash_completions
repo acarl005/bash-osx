@@ -4,11 +4,9 @@ foreman_run() {
   words=`cat Procfile | cut -d ':' -f1`
   if [[ $3 = start ]]; then
     COMPREPLY=( $(compgen -W "$words" $2) )
-  else
-    COMPREPLY=( $(compgen -W "$(ls -A)" $2) )
   fi
 }
-complete -F foreman_run foreman
+complete -o default -F foreman_run foreman
 
 npm_run() {
   words=`node<<-NODE
@@ -19,8 +17,6 @@ NODE`
 
   if [[ $3 = run ]]; then
     COMPREPLY=( $(compgen -W "$words" $2) )
-  else
-    COMPREPLY=( $(compgen -W "$(ls -A)" $2) )
   fi
 }
-complete -F npm_run npm
+complete -o default -F npm_run npm
