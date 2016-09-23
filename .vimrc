@@ -11,22 +11,11 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
-" The following are examples of different formats supported.
-" Keep Plugin commands between vundle#begin/end.
-" plugin on GitHub repo
-Plugin 'tpope/vim-fugitive'
 " plugin from http://vim-scripts.org/vim/scripts.html
 Plugin 'L9'
-" Git plugin not hosted on GitHub
-Plugin 'git://git.wincent.com/command-t.git'
-" git repos on your local machine (i.e. when working on your own plugin)
-" Plugin 'file:///home/gmarik/path/to/plugin'
 " The sparkup vim script is in a subdirectory of this repo called vim.
 " Pass the path to set the runtimepath properly.
 Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-" Install L9 and avoid a Naming conflict if you've already installed a
-" different version somewhere else.
-" Plugin 'ascenator/L9', {'name': 'newL9'}
 
 Plugin 'Townk/vim-autoclose.git' " auto add matching bracket or quote when you type one
 Plugin 'jelera/vim-javascript-syntax' " better js highlighting
@@ -51,6 +40,8 @@ Plugin 'kana/vim-textobj-user' " plugin for defining custom text objects
 Plugin 'glts/vim-textobj-comment' " binds a text object to c for comments
 Plugin 'nelstrom/vim-textobj-rubyblock' " binds a text object to r for ruby blocks
 Plugin 'michaeljsmith/vim-indent-object' " binds a text object to i for an indentation level (good for python)
+Plugin 'zandrmartin/vim-textobj-blanklines' " text obj for blank lines to <space>
+Plugin 'sgur/vim-textobj-parameter' " text obj for a function param to ,
 
 Plugin 'NLKNguyen/papercolor-theme'
 
@@ -139,11 +130,13 @@ let g:ctrlp_working_path_mode = 'ra'
 set conceallevel=0
 let g:vim_json_syntax_conceal = 0
 
+let g:omni_sql_no_default_maps = 1
+
 " custom key mappings
 " when in insert mode, insert line above
-imap <nowait> <C-l> <C-c>O
+imap <nowait> <C-l> <ESC>O
 " insert console.log (alt+c)
-imap <nowait> ç console.log()<C-c>i
+imap <nowait> ç console.log()<ESC>i
 " edit the .vimrc (alt+v)
 nmap <nowait> √ :tabe ~/.vimrc<CR>
 " pretty format for a JSON file. just press =j
@@ -153,7 +146,9 @@ map <nowait> <C-t> :tabe<CR>
 " remove all trailing whitespace
 nnoremap <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
 
-:command Dedent call Dedent()
+command Conf :tabe ~/.vimrc
+" convert 4-space indentation to 2-space
+command Dedent call Dedent()
 function! Dedent()
   set ts=4 sts=4 noet
   retab!

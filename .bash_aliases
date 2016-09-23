@@ -13,7 +13,6 @@ alias ....="cd ../../.."
 alias al='e ~/.bash_aliases'
 alias rc='e ~/.bashrc'
 alias be="bundle exec"
-alias fr="foreman run"
 alias serv="python -m SimpleHTTPServer"
 alias chrome="open -a /Applications/Google\ Chrome.app/"
 alias e=$EDITOR

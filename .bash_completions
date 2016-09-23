@@ -1,22 +1,37 @@
 #!/bin/bash
 
-foreman_run() {
-  words=`cat Procfile | cut -d ':' -f1`
-  if [[ $3 = start ]]; then
+comp_foreman_start() {
+  if [[ -f Procfile ]]; then
+    if [[ $3 = start ]]; then
+      words=`cat Procfile | cut -d ':' -f1`
+      COMPREPLY=( $(compgen -W "$words" $2) )
+    fi
+  fi
+}
+complete -o default -F comp_foreman_start foreman
+alias fs="foreman start"
+alias fr="foreman run"
+
+comp_fs() {
+  if [[ -f Procfile ]]; then
+    words=`cat Procfile | cut -d ':' -f1`
     COMPREPLY=( $(compgen -W "$words" $2) )
   fi
 }
-complete -o default -F foreman_run foreman
+complete -o default -F comp_fs fs
 
-npm_run() {
-  words=`node<<-NODE
-    const scripts = require('./package.json').scripts
-    const list = Object.keys(scripts).join(' ')
-    console.log(list)
+comp_npm_run() {
+  if [[ -f package.json ]]; then
+
+    words=`node<<-NODE
+      const scripts = require('./package.json').scripts
+      const list = Object.keys(scripts).join(' ')
+      console.log(list)
 NODE`
 
-  if [[ $3 = run ]]; then
-    COMPREPLY=( $(compgen -W "$words" $2) )
+    if [[ $3 = run ]]; then
+      COMPREPLY=( $(compgen -W "$words" $2) )
+    fi
   fi
 }
-complete -o default -F npm_run npm
+complete -o default -F comp_npm_run npm
