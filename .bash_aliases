@@ -7,9 +7,14 @@ alias ls='ls -Gp'
 alias ccat='/bin/cat'
 alias less='less -FSRXc'
 alias rn='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR"'
-alias ..="cd .."
-alias ...="cd ../.."
-alias ....="cd ../../.."
+DOTS=..
+ARG=..
+for i in `seq 1 11`; do
+  alias $DOTS="cd $ARG"
+  DOTS="${DOTS}."
+  ARG="${ARG}/.."
+done
+
 alias al='e ~/.bash_aliases'
 alias rc='e ~/.bashrc'
 alias be="bundle exec"

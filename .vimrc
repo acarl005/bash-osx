@@ -96,7 +96,7 @@ set hlsearch " highlight the current search term
 set clipboard=unnamed " the vim clipboard is be the same as the system clipboard
 set backspace=indent,eol,start " enable backspace button
 set scrolloff=15 " vim will automatically adjust viewport to leave at least 15 lines above and below cursor when possible
-set wildignore=*/node_modules/*,*.swp,*.zip
+set wildignore=*/node_modules/*,*.swp,*.zip,*/dist/*
 set nofoldenable " disables code folding, because its confusing and I can't find decent docs on it
 
 " configure the status line
@@ -134,7 +134,7 @@ let g:omni_sql_no_default_maps = 1
 
 " custom key mappings
 " when in insert mode, insert line above
-imap <nowait> <C-l> <ESC>O
+imap <nowait> <C-l> <C-c>O
 " insert console.log (alt+c)
 imap <nowait> ç console.log()<ESC>i
 " edit the .vimrc (alt+v)
