@@ -137,16 +137,19 @@ let g:omni_sql_no_default_maps = 1
 imap <nowait> <C-l> <C-c>O
 " insert console.log (alt+c)
 imap <nowait> ç console.log()<ESC>i
-" edit the .vimrc (alt+v)
-nmap <nowait> √ :tabe ~/.vimrc<CR>
 " pretty format for a JSON file. just press =j
 nmap =j :%!python -m json.tool<CR>
 " open new tab
 map <nowait> <C-t> :tabe<CR>
 " remove all trailing whitespace
 nnoremap <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
+" select the freshly pasted text
+nnoremap <expr> gV    "`[".getregtype(v:register)[0]."`]"
 
 command Conf :tabe ~/.vimrc
+"command Trim :%s/\s\+$//g
+command Trim :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s
+
 " convert 4-space indentation to 2-space
 command Dedent call Dedent()
 function! Dedent()
