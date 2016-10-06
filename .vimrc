@@ -83,6 +83,12 @@ set fillchars+=stl:\ ,stlnc:\
 set term=xterm-256color
 set termencoding=utf-8
 
+
+set showcmd " Display commands in the bottom right corner as they are typed
+set nobackup " Disable backup
+set nowritebackup
+set noswapfile
+set autoread " Auto read when a file is changed from the outside
 set expandtab " convert tab to spaces
 set shiftwidth=2
 set softtabstop=2
@@ -93,6 +99,7 @@ set smartindent
 set ignorecase " searches are case insensitive
 set smartcase " searches become case sensitive when you enter capital letters
 set hlsearch " highlight the current search term
+set incsearch " highight search incrementally
 set clipboard=unnamed " the vim clipboard is be the same as the system clipboard
 set backspace=indent,eol,start " enable backspace button
 set scrolloff=15 " vim will automatically adjust viewport to leave at least 15 lines above and below cursor when possible
