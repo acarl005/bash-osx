@@ -1,5 +1,6 @@
 # some more aliases
 
+alias grep='echo excluding node_modules/; grep --exclude-dir=node_modules'
 alias cp='cp -iv'
 alias mv='mv -iv'
 alias mkdir='mkdir -pv'

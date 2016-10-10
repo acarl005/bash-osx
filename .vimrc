@@ -83,12 +83,9 @@ set fillchars+=stl:\ ,stlnc:\
 set term=xterm-256color
 set termencoding=utf-8
 
+let mapleader = ','
 
 set showcmd " Display commands in the bottom right corner as they are typed
-set nobackup " Disable backup
-set nowritebackup
-set noswapfile
-set autoread " Auto read when a file is changed from the outside
 set expandtab " convert tab to spaces
 set shiftwidth=2
 set softtabstop=2
@@ -152,6 +149,15 @@ map <nowait> <C-t> :tabe<CR>
 nnoremap <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
 " select the freshly pasted text
 nnoremap <expr> gV    "`[".getregtype(v:register)[0]."`]"
+" replace single quotes with double quotes
+map <leader>' :s/"/'/g<CR>
+" strip double quotes from keys in JSON. useful when pasting JSON into a JS
+" file and the linter complains about unecessary quoting
+map <leader>j :s/^\(\s*\)"\(\w\+\)"/\1\2/g<CR>
+" a more convenient save shortcut
+map <leader>w :w<CR>
+" reload .vimrc
+map <silent> <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
 
 command Conf :tabe ~/.vimrc
 "command Trim :%s/\s\+$//g
