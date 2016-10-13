@@ -218,6 +218,17 @@ pushd() { builtin pushd "$@"; ll; }
 mkcd() { mkdir -p "$1" && cd "$1"; }
 te() { touch "$1"; e "$1"; }
 
+# enable colorful man pages
+man() {
+  LESS_TERMCAP_md=$'\e[01;31m' \
+  LESS_TERMCAP_me=$'\e[0m' \
+  LESS_TERMCAP_se=$'\e[0m' \
+  LESS_TERMCAP_so=$'\e[01;44;33m' \
+  LESS_TERMCAP_ue=$'\e[0m' \
+  LESS_TERMCAP_us=$'\e[01;32m' \
+  command man "$@"
+}
+
 if [[ `which pygmentize` ]]; then
   # overwrite cat command so that it uses pygments instead
   cat() {
@@ -293,3 +304,5 @@ export PYTHONSTARTUP=$HOME/.pythonrc.py
 
 # added by travis gem
 [ -f /Users/andy/.travis/travis.sh ] && source /Users/andy/.travis/travis.sh
+
+export PATH="$HOME/.yarn/bin:$PATH"

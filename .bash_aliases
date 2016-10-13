@@ -53,7 +53,7 @@ alias ns="npm start"
 alias nsd="npm run start-dev"
 alias nr="npm run"
 alias root='builtin cd `npm root` && cd ..'
-alias groot="cd `git rev-parse --show-toplevel`"
+alias groot='cd `git rev-parse --show-toplevel`'
 
 alias u='echo -n `uuid` | pbcopy'
 

@@ -28,6 +28,7 @@ Plugin 'kien/ctrlp.vim' " fuzzy searching for files
 Plugin 'Yggdroot/indentLine' " adds a little grey line at each indentation level
 Plugin 'airblade/vim-gitgutter'
 Plugin 'scrooloose/nerdcommenter' " adds keybindings for easily commenting out lines \c<space> to toggle
+Plugin 'scrooloose/nerdtree' " a file explorer
 Plugin 'AndrewRadev/splitjoin.vim'
 
 " a pretty status line 
@@ -108,7 +109,7 @@ set laststatus=2 " always show the status bar
 
 " these manually configure a nice status line. they are not necessary when
 " powerline is installed
-"set statusline=   " clear the statusline for when vimrc is reloaded "
+"set statusline=   " clear the statusline for when vimrc is reloaded
 "set statusline=%f " show filename
 "set statusline+=[%{strlen(&fenc)?&fenc:'none'},%{&ff}]  " show encoding
 "set statusline+=%h%m%r%y
@@ -158,6 +159,7 @@ map <leader>j :s/^\(\s*\)"\(\w\+\)"/\1\2/g<CR>
 map <leader>w :w<CR>
 " reload .vimrc
 map <silent> <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
+map <C-e> :NERDTreeToggle<CR>
 
 command Conf :tabe ~/.vimrc
 "command Trim :%s/\s\+$//g
