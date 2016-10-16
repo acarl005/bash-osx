@@ -26,11 +26,12 @@ Plugin 'kchmck/vim-coffee-script' " coffeescript syntax highlighting
 Plugin 'scrooloose/syntastic' " inline syntax checker
 Plugin 'kien/ctrlp.vim' " fuzzy searching for files
 Plugin 'Yggdroot/indentLine' " adds a little grey line at each indentation level
-Plugin 'airblade/vim-gitgutter'
+Plugin 'airblade/vim-gitgutter' " adds git diff symbols on the left hand side
 Plugin 'scrooloose/nerdcommenter' " adds keybindings for easily commenting out lines \c<space> to toggle
 Plugin 'scrooloose/nerdtree' " a file explorer
 Plugin 'AndrewRadev/splitjoin.vim' " switch formatting of objects between one-line and multi-line with gj and gS
 Plugin 'primitivorm/vim-swaplines' " move lines up or down
+Plugin 'eapache/rainbow_parentheses.vim' " color parentheses based on depth
 
 " a pretty status line 
 " requires installation of this font package on OSX:
@@ -131,6 +132,13 @@ let g:syntastic_check_on_wq = 0
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ra'
+
+" rainbow parentheses always on
+au VimEnter * RainbowParenthesesToggle
+au Syntax * RainbowParenthesesLoadRound
+au Syntax * RainbowParenthesesLoadSquare
+au Syntax * RainbowParenthesesLoadBraces
+
 
 " dont hide double quotes using vim-json
 set conceallevel=0
