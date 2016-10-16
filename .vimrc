@@ -29,7 +29,8 @@ Plugin 'Yggdroot/indentLine' " adds a little grey line at each indentation level
 Plugin 'airblade/vim-gitgutter'
 Plugin 'scrooloose/nerdcommenter' " adds keybindings for easily commenting out lines \c<space> to toggle
 Plugin 'scrooloose/nerdtree' " a file explorer
-Plugin 'AndrewRadev/splitjoin.vim'
+Plugin 'AndrewRadev/splitjoin.vim' " switch formatting of objects between one-line and multi-line with gj and gS
+Plugin 'primitivorm/vim-swaplines' " move lines up or down
 
 " a pretty status line 
 " requires installation of this font package on OSX:
@@ -161,6 +162,10 @@ map <leader>w :w<CR>
 map <silent> <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
 map <C-e> :NERDTreeToggle<CR>
 
+" key mappings for primitivorm/vim-swaplines plugin
+noremap <silent> <C-k> :SwapUp<CR>
+noremap <silent> <C-j> :SwapDown<CR>
+
 command Conf :tabe ~/.vimrc
 "command Trim :%s/\s\+$//g
 command Trim :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s
@@ -173,4 +178,14 @@ function! Dedent()
   set ts=2 sts=2 et
   retab
 endfunction
+
+" view a diff of the unsaved changes
+function! s:DiffWithSaved()
+  let filetype=&ft
+  diffthis
+  vnew | r # | normal! 1Gdd
+  diffthis
+  exe "setlocal bt=nofile bh=wipe nobl noswf ro ft=" . filetype
+endfunction
+com! DiffSaved call s:DiffWithSaved()
 
