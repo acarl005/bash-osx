@@ -57,8 +57,8 @@ if [[ `which java` ]]; then
   export JAVA_HOME=`/usr/libexec/java_home`
 fi
 
-if [[ `which neofetch` ]]; then
-  neofetch
+if [[ `which screenfetch` ]]; then
+  screenfetch
 else
   # Greet me with a mario and other stuff
   echo
@@ -81,7 +81,7 @@ else
   echo -e "[48;5;m  [0m[48;5;95m      [0m[48;5;33m            [0m[48;5;m            [0m"
   echo -e "[48;5;m  [0m[48;5;95m    [0m[48;5;m                          [0m"
   echo
-  suggest neofetch https://github.com/dylanaraps/neofetch
+  suggest screenfetch https://github.com/KittyKatt/screenFetch
 fi
 
 # Load git completions

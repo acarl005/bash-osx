@@ -7,7 +7,6 @@ pushd ~/Documents/projects/bash
 
 
 cp ~/.bashrc ./
-cp ~/.bash_profile ./
 cp ~/.bash_aliases ./
 cp ~/.bash_completions ./
 cp -R ~/bin ./

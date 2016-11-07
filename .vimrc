@@ -72,7 +72,7 @@ if strftime('%H') > 16
 elseif strftime('%H') < 7
   set background=dark
 else
-  set background=light
+  "set background=light
 endif
 
 " a matching extension for things like ruby blocks
@@ -151,6 +151,8 @@ let g:omni_sql_no_default_maps = 1
 imap <nowait> <C-l> <C-c>O
 " insert console.log (alt+c)
 imap <nowait> ç console.log()<ESC>i
+" wrap in JSON.stringify (alt+j)
+imap <nowait> ∆ JSON.stringify(, null, 2)<ESC>2F,i
 " pretty format for a JSON file. just press =j
 nmap =j :%!python -m json.tool<CR>
 " open new tab
@@ -163,9 +165,11 @@ nnoremap <expr> gV    "`[".getregtype(v:register)[0]."`]"
 map <leader>' :s/"/'/g<CR>
 " strip double quotes from keys in JSON. useful when pasting JSON into a JS
 " file and the linter complains about unecessary quoting
-map <leader>j :s/^\(\s*\)"\(\w\+\)"/\1\2/g<CR>
+map <leader>j :s/^\(\s*\)"\(\w\+\)"\s*:/\1\2:/g<CR>
 " a more convenient save shortcut
 map <leader>w :w<CR>
+" a more convenient quit shorcut
+map <leader>q :q<CR>
 " reload .vimrc
 map <silent> <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
 map <C-e> :NERDTreeToggle<CR>
@@ -174,9 +178,12 @@ map <C-e> :NERDTreeToggle<CR>
 noremap <silent> <C-k> :SwapUp<CR>
 noremap <silent> <C-j> :SwapDown<CR>
 
+" open the vimrc
 command Conf :tabe ~/.vimrc
-"command Trim :%s/\s\+$//g
+" command Trim :%s/\s\+$//g
 command Trim :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s
+" translate snake case to camel case
+command Camel %s/\([a-z0-9]\)_\([a-z0-9]\)/\1\u\2/g
 
 " convert 4-space indentation to 2-space
 command Dedent call Dedent()
