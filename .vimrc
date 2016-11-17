@@ -17,13 +17,9 @@ Plugin 'L9'
 " Pass the path to set the runtimepath properly.
 Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 
-Plugin 'Townk/vim-autoclose.git' " auto add matching bracket or quote when you type one
-Plugin 'jelera/vim-javascript-syntax' " better js highlighting
-Plugin 'elzr/vim-json' " better json highlighting 
+Plugin 'jiangmiao/auto-pairs' " auto add matching bracket or quote when you type one
 Plugin 'terryma/vim-multiple-cursors' " sublime-text-like mutli cursors
 Plugin 'tpope/vim-surround' " manipulates surrounding brackets and quotes
-Plugin 'kchmck/vim-coffee-script' " coffeescript syntax highlighting
-Plugin 'scrooloose/syntastic' " inline syntax checker
 Plugin 'kien/ctrlp.vim' " fuzzy searching for files
 Plugin 'Yggdroot/indentLine' " adds a little grey line at each indentation level
 Plugin 'airblade/vim-gitgutter' " adds git diff symbols on the left hand side
@@ -32,6 +28,12 @@ Plugin 'scrooloose/nerdtree' " a file explorer
 Plugin 'AndrewRadev/splitjoin.vim' " switch formatting of objects between one-line and multi-line with gj and gS
 Plugin 'primitivorm/vim-swaplines' " move lines up or down
 Plugin 'eapache/rainbow_parentheses.vim' " color parentheses based on depth
+
+Plugin 'scrooloose/syntastic' " inline syntax checker
+Plugin 'jelera/vim-javascript-syntax' " better js highlighting
+Plugin 'elzr/vim-json' " better json highlighting 
+Plugin 'raichoo/purescript-vim' " purescript syntax
+Plugin 'kchmck/vim-coffee-script' " coffeescript syntax highlighting
 
 " a pretty status line 
 " requires installation of this font package on OSX:
@@ -72,7 +74,7 @@ if strftime('%H') > 16
 elseif strftime('%H') < 7
   set background=dark
 else
-  "set background=light
+  set background=light
 endif
 
 " a matching extension for things like ruby blocks
@@ -91,6 +93,7 @@ let mapleader = ','
 set showcmd " Display commands in the bottom right corner as they are typed
 set expandtab " convert tab to spaces
 set shiftwidth=2
+set tabstop=2
 set softtabstop=2
 set relativenumber " line numbers are relative to where the cursor is
 set number " line numbers
@@ -109,8 +112,7 @@ set nofoldenable " disables code folding, because its confusing and I can't find
 " configure the status line
 set laststatus=2 " always show the status bar
 
-" these manually configure a nice status line. they are not necessary when
-" powerline is installed
+" these manually configure a nice status line. they are not necessary when powerline is installed
 "set statusline=   " clear the statusline for when vimrc is reloaded
 "set statusline=%f " show filename
 "set statusline+=[%{strlen(&fenc)?&fenc:'none'},%{&ff}]  " show encoding
@@ -146,6 +148,9 @@ let g:vim_json_syntax_conceal = 0
 
 let g:omni_sql_no_default_maps = 1
 
+" set indent level of purescript 
+let g:purescript_indent_let = 4
+
 " custom key mappings
 " when in insert mode, insert line above
 imap <nowait> <C-l> <C-c>O
@@ -170,6 +175,8 @@ map <leader>j :s/^\(\s*\)"\(\w\+\)"\s*:/\1\2:/g<CR>
 map <leader>w :w<CR>
 " a more convenient quit shorcut
 map <leader>q :q<CR>
+" dedent block and delete line with surrounding brackets
+map <leader>x <i{]}dd[{dd
 " reload .vimrc
 map <silent> <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
 map <C-e> :NERDTreeToggle<CR>
