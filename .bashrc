@@ -47,6 +47,11 @@ if [ -d "$HOME/Go" ]; then
   PATH="$GOPATH/bin:$PATH"
 fi
 
+# include rabbitmq commands
+if [ -d /usr/local/sbin ]; then
+  PATH="$PATH:/usr/local/sbin"
+fi
+
 # use the version of Git i installed with homebrew instead of the one that came with the OS
 if brew --prefix git >/dev/null 2>&1; then
   PATH="$(brew --prefix git)/bin:$PATH"
@@ -104,8 +109,9 @@ fi
 
 # PROMPT_COMMAND is a variable whose value is some code that gets evaluated each time the prompt awaits input
 # PS1 is the variable for the prompt you see when terminal is awaiting input
-PROMPT_COMMAND='PS1="$(generate_prompt)${reset_esc} "
-echo -ne "\033]0;$(basename $(pwd))\007";'
+# the echo uses an escape sequence to update the current tab name if the terminal supports multiple tabs
+# the history part makes sure the history from all tabs gets saved to .bash_history after they are closed
+PROMPT_COMMAND='echo -ne "\033]0;$(basename $(pwd))\007"; history -a; history -r; PS1="$(generate_prompt) ${reset_esc}";'
 export PS2='... '
 
 generate_prompt() {
@@ -213,7 +219,7 @@ if [ -f ~/.bash_completions ]; then
   . ~/.bash_completions
 fi
 
-cd() { builtin cd "$@"; ll; }
+cd() { builtin cd "$@" && printf "\033c" && ll; }
 pushd() { builtin pushd "$@"; ll; }
 mkcd() { mkdir -p "$1" && cd "$1"; }
 te() { touch "$1"; e "$1"; }
@@ -297,6 +303,9 @@ alias ipInfo0='ipconfig getpacket en0'              # ipInfo0:      Get info on 
 alias ipInfo1='ipconfig getpacket en1'              # ipInfo1:      Get info on connections for en1
 alias openPorts='sudo lsof -i | grep LISTEN'        # openPorts:    All listening connections
 alias showBlocked='sudo ipfw list'                  # showBlocked:  All ipfw rules inc/ blocked IPs
+listening() {
+  lsof -n -i4TCP:$1 | grep LISTEN
+}
 
 # load a config file for the python REPL
 export PYTHONSTARTUP=$HOME/.pythonrc.py
@@ -305,4 +314,5 @@ export PYTHONSTARTUP=$HOME/.pythonrc.py
 # added by travis gem
 [ -f /Users/andy/.travis/travis.sh ] && source /Users/andy/.travis/travis.sh
 
-export PATH="$HOME/.yarn/bin:$PATH"
+export PATH="$HOME/.yarn/bin:$HOME/Downloads/spark-2.0.2-bin-hadoop2.7/bin:$PATH"
+

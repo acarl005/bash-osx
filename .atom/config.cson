@@ -10,6 +10,7 @@
       ".git"
       "*.pyc"
     ]
+    telemetryConsent: "no"
     themes: [
       "one-dark-ui"
       "apathy-theme"
@@ -27,8 +28,7 @@
     userId: "6f2bc645-2e3b-35e6-198c-50fcbb4f2c39"
   jshint:
     supportLintingJsx: true
-  linter:
-    errorPanelHeight: 47
+  linter: {}
   "markdown-preview":
     useGitHubStyle: true
   "tree-view":

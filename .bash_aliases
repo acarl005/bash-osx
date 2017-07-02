@@ -16,7 +16,7 @@ for i in `seq 1 11`; do
   ARG="${ARG}/.."
 done
 
-alias al='e ~/.bash_aliases'
+alias al='e ~/.bash_aliases && . ~/.bash_aliases'
 alias rc='e ~/.bashrc'
 alias be="bundle exec"
 alias serv="python -m SimpleHTTPServer"
@@ -43,9 +43,10 @@ export docs="$HOME/Documents"
 alias pg="/usr/local/var/postgres"
 export pg="/usr/local/var/postgres"
 
-alias gs="git s"
+alias tit=git
 alias dm="docker-machine"
 alias fm=foreman
+alias ipy=ipython
 
 alias nis="npm install --save"
 alias nisd="npm install --save-dev"
@@ -62,3 +63,5 @@ alias jets=jest
 alias etcbkp='rm -rf ~/etcd-backup && etcdctl backup --data-dir ~/default.etcd --backup-dir ~/etcd-backup && tar -C ~ -cvzf etcd-backup.tar.gz etcd-backup; ls ~/etcd-backup.tar.gz'
 alias etc='etcdctl'
 alias sandbox-etc='etcdctl --ca-file ~/etcd-sandbox.cert --no-sync --peers "https://aws-us-east-1-portal.12.dblayer.com:10799,https://aws-us-east-1-portal.15.dblayer.com:11263" -u root:JZGSKAQDFQLPDBUZ'
+
+alias pirate='youtube-dl --extract-audio --audio-format mp3'

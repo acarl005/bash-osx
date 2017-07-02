@@ -1,3 +1,4 @@
+#!/bin/bash
 c_reset='\033[0m'
 c_red='\033[0;31;40m'
 c_green='\033[0;32m'

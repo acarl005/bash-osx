@@ -17,23 +17,27 @@ Plugin 'L9'
 " Pass the path to set the runtimepath properly.
 Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 
-Plugin 'jiangmiao/auto-pairs' " auto add matching bracket or quote when you type one
+Plugin 'Townk/vim-autoclose.git' " auto add matching bracket or quote when you type one
+"Plugin 'jiangmiao/auto-pairs' " auto add matching bracket or quote when you type one. has an annoying problem of skipping over the closing brace when i'm trying to actually insert one
 Plugin 'terryma/vim-multiple-cursors' " sublime-text-like mutli cursors
 Plugin 'tpope/vim-surround' " manipulates surrounding brackets and quotes
-Plugin 'kien/ctrlp.vim' " fuzzy searching for files
+Plugin 'tpope/vim-repeat' " adds . support for the vim-surround maps
+Plugin 'ctrlpvim/ctrlp.vim' " fuzzy searching for files
 Plugin 'Yggdroot/indentLine' " adds a little grey line at each indentation level
 Plugin 'airblade/vim-gitgutter' " adds git diff symbols on the left hand side
 Plugin 'scrooloose/nerdcommenter' " adds keybindings for easily commenting out lines \c<space> to toggle
 Plugin 'scrooloose/nerdtree' " a file explorer
 Plugin 'AndrewRadev/splitjoin.vim' " switch formatting of objects between one-line and multi-line with gj and gS
-Plugin 'primitivorm/vim-swaplines' " move lines up or down
+Plugin 'skammer/vim-swaplines' " move lines up or down
 Plugin 'eapache/rainbow_parentheses.vim' " color parentheses based on depth
+Plugin 'sagarrakshe/toggle-bool' " shortcut for toggling booleans in whatever language
 
 Plugin 'scrooloose/syntastic' " inline syntax checker
 Plugin 'jelera/vim-javascript-syntax' " better js highlighting
+Plugin 'kchmck/vim-coffee-script'
 Plugin 'elzr/vim-json' " better json highlighting 
-Plugin 'raichoo/purescript-vim' " purescript syntax
-Plugin 'kchmck/vim-coffee-script' " coffeescript syntax highlighting
+Plugin 'derekwyatt/vim-scala'
+Plugin 'vim-scripts/cool.vim'
 
 " a pretty status line 
 " requires installation of this font package on OSX:
@@ -66,6 +70,7 @@ filetype plugin indent on    " required
 " Put your non-Plugin stuff after this line
 
 syntax on " enable syntax highlighting
+
 " Use dark color theme after 5pm and light color theme in the morning
 colorscheme pablo
 colorscheme PaperColor
@@ -80,14 +85,18 @@ endif
 " a matching extension for things like ruby blocks
 runtime macros/matchit.vim
 
+" my favorite font. also includes customized unicode characters for making powerline look super dope
 set guifont=Inconsolata\ for\ Powerline:h15
+" tell powerline to use those custom characters
 let g:Powerline_symbols = 'fancy'
+
 set encoding=utf-8
 set t_Co=256
 set fillchars+=stl:\ ,stlnc:\
 set term=xterm-256color
 set termencoding=utf-8
 
+" default leader key is \ which is inconvenient
 let mapleader = ','
 
 set showcmd " Display commands in the bottom right corner as they are typed
@@ -95,7 +104,7 @@ set expandtab " convert tab to spaces
 set shiftwidth=2
 set tabstop=2
 set softtabstop=2
-set relativenumber " line numbers are relative to where the cursor is
+"set relativenumber " line numbers are relative to where the cursor is (has performance issues on large files > 500 lines)
 set number " line numbers
 set autoindent
 set smartindent
@@ -123,6 +132,8 @@ set laststatus=2 " always show the status bar
 
 " syntastic options
 let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_javascript_eslint_exec = 'eslint_d'
+let g:syntastic_python_checkers = ['pyflakes']
 "let g:syntastic_mode_map = { "mode": "passive" }
 let g:jsx_ext_required = 0
 let g:syntastic_always_populate_loc_list = 0
@@ -134,6 +145,7 @@ let g:syntastic_check_on_wq = 0
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 
 " rainbow parentheses always on
 au VimEnter * RainbowParenthesesToggle
@@ -146,10 +158,8 @@ au Syntax * RainbowParenthesesLoadBraces
 set conceallevel=0
 let g:vim_json_syntax_conceal = 0
 
+" vim includes a bunch of keybindings in SQL files that overwrite my own. disable those
 let g:omni_sql_no_default_maps = 1
-
-" set indent level of purescript 
-let g:purescript_indent_let = 4
 
 " custom key mappings
 " when in insert mode, insert line above
@@ -158,6 +168,8 @@ imap <nowait> <C-l> <C-c>O
 imap <nowait> ç console.log()<ESC>i
 " wrap in JSON.stringify (alt+j)
 imap <nowait> ∆ JSON.stringify(, null, 2)<ESC>2F,i
+imap <nowait> ß // eslint-disable-line
+imap <nowait> † require('util').inspect(, {depth: 10}))<ESC>F,i
 " pretty format for a JSON file. just press =j
 nmap =j :%!python -m json.tool<CR>
 " open new tab
@@ -177,6 +189,8 @@ map <leader>w :w<CR>
 map <leader>q :q<CR>
 " dedent block and delete line with surrounding brackets
 map <leader>x <i{]}dd[{dd
+" add comma at the end
+map <leader>, A,<ESC>
 " reload .vimrc
 map <silent> <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
 map <C-e> :NERDTreeToggle<CR>
@@ -185,12 +199,21 @@ map <C-e> :NERDTreeToggle<CR>
 noremap <silent> <C-k> :SwapUp<CR>
 noremap <silent> <C-j> :SwapDown<CR>
 
+" a more convenient way to exist insert mode
+" jj and jk "never" occur together in the english language, so its safe to map to <esc>
+inoremap jj <esc>
+inoremap jk <esc>
+
+
 " open the vimrc
 command Conf :tabe ~/.vimrc
 " command Trim :%s/\s\+$//g
 command Trim :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s
 " translate snake case to camel case
 command Camel %s/\([a-z0-9]\)_\([a-z0-9]\)/\1\u\2/g
+
+command Day :set background=light
+command Night :set background=dark
 
 " convert 4-space indentation to 2-space
 command Dedent call Dedent()
