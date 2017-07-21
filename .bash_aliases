@@ -5,7 +5,6 @@ alias cp='cp -iv'
 alias mv='mv -iv'
 alias mkdir='mkdir -pv'
 alias ls='ls -Gp'
-alias ccat='/bin/cat'
 alias less='less -FSRXc'
 alias rn='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR"'
 DOTS=..
