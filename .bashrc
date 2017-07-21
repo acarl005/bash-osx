@@ -247,8 +247,12 @@ man() {
 if [[ `which pygmentize` ]]; then
   # overwrite cat command so that it uses pygments instead
   cat() {
-    pygmentize "$@" 2>/dev/null # silence errors
-    [[ $? != 0 ]] && /bin/cat "$@" # if an error occurs, fall back to the regular cat
+    if [ -t 1 ]; then
+      pygmentize "$@" 2>/dev/null # silence errors
+      [[ $? != 0 ]] && /bin/cat "$@" # if an error occurs, fall back to the regular cat
+    else
+      /bin/cat "$@"
+    fi
   }
 else
   suggest pygments http://pygments.org/download/
