@@ -247,9 +247,11 @@ man() {
 if [[ `which pygmentize` ]]; then
   # overwrite cat command so that it uses pygments instead
   cat() {
+    # only use color if the stdout points to the terminal
     if [ -t 1 ]; then
       pygmentize "$@" 2>/dev/null # silence errors
       [[ $? != 0 ]] && /bin/cat "$@" # if an error occurs, fall back to the regular cat
+    # otherwise, if we're piping to another command, we dont want the color
     else
       /bin/cat "$@"
     fi
