@@ -35,6 +35,7 @@ Plugin 'sagarrakshe/toggle-bool' " shortcut for toggling booleans in whatever la
 Plugin 'scrooloose/syntastic' " inline syntax checker
 Plugin 'jelera/vim-javascript-syntax' " better js highlighting
 Plugin 'kchmck/vim-coffee-script'
+Plugin 'leafgarland/typescript-vim'
 Plugin 'elzr/vim-json' " better json highlighting 
 Plugin 'derekwyatt/vim-scala'
 Plugin 'vim-scripts/cool.vim'
@@ -169,7 +170,7 @@ imap <nowait> ç console.log()<ESC>i
 " wrap in JSON.stringify (alt+j)
 imap <nowait> ∆ JSON.stringify(, null, 2)<ESC>2F,i
 imap <nowait> ß // eslint-disable-line
-imap <nowait> † require('util').inspect(, {depth: 10}))<ESC>F,i
+imap <nowait> † require('util').inspect(, {depth: 10, color: true}))<ESC>F,i
 " pretty format for a JSON file. just press =j
 nmap =j :%!python -m json.tool<CR>
 " open new tab
@@ -198,11 +199,6 @@ map <C-e> :NERDTreeToggle<CR>
 " key mappings for primitivorm/vim-swaplines plugin
 noremap <silent> <C-k> :SwapUp<CR>
 noremap <silent> <C-j> :SwapDown<CR>
-
-" a more convenient way to exist insert mode
-" jj and jk "never" occur together in the english language, so its safe to map to <esc>
-inoremap jj <esc>
-inoremap jk <esc>
 
 
 " open the vimrc

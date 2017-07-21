@@ -62,8 +62,8 @@ if [[ `which java` ]]; then
   export JAVA_HOME=`/usr/libexec/java_home`
 fi
 
-if [[ `which screenfetch` ]]; then
-  screenfetch
+if [[ `which neofetch` ]]; then
+  neofetch
 else
   # Greet me with a mario and other stuff
   echo
@@ -111,10 +111,17 @@ fi
 # PS1 is the variable for the prompt you see when terminal is awaiting input
 # the echo uses an escape sequence to update the current tab name if the terminal supports multiple tabs
 # the history part makes sure the history from all tabs gets saved to .bash_history after they are closed
-PROMPT_COMMAND='echo -ne "\033]0;$(basename $(pwd))\007"; history -a; history -r; PS1="$(generate_prompt) ${reset_esc}";'
+PROMPT_COMMAND='EXIT=$?; echo -ne "\033]0;$(basename $(pwd))\007"; history -a; history -r; PS1="$(generate_prompt) ${reset_esc}";'
 export PS2='... '
 
 generate_prompt() {
+  STATUS_BG=196
+  STATUS_STR='✘ '
+  if [[ $EXIT = 0 ]]; then
+    STATUS_BG=40
+    STATUS_STR='✔︎ '
+  fi
+
   ENV_BG=27
   ENV_STR=
   if [[ $VIRTUAL_ENV ]]; then
@@ -157,7 +164,7 @@ generate_prompt() {
   fi
   # change the colors when we aren't in the home directory, so we know the potential danger of deleting and editting things out here
   if [[ $(pwd) != "$HOME"* ]]; then
-    DIR_BG=0
+    DIR_BG=235
     DIR_FG=210
     DIR_STR="💀 $DIR_STR"
   fi
@@ -175,9 +182,11 @@ generate_prompt() {
     fi
   fi
 
-  PROMPT_STR=
+  PROMPT_STR="$(fg_bg_esc 16 $STATUS_BG)$STATUS_STR"
   if [[ ! -z $ENV_STR ]]; then
-    PROMPT_STR="$(fg_bg_esc 255 $ENV_BG)$ENV_STR  $(fg_bg_esc $ENV_BG $DIR_BG)"
+    PROMPT_STR="$PROMPT_STR$(fg_bg_esc $STATUS_BG $ENV_BG)$(fg_bg_esc 255 $ENV_BG)$ENV_STR  $(fg_bg_esc $ENV_BG $DIR_BG)"
+  else
+    PROMPT_STR="$PROMPT_STR$(fg_bg_esc $STATUS_BG $DIR_BG)"
   fi
   PROMPT_STR="$PROMPT_STR$(fg_bg_esc $DIR_FG $DIR_BG) $DIR_STR "
   if [[ -z $GIT_STR ]]; then
@@ -220,7 +229,7 @@ if [ -f ~/.bash_completions ]; then
 fi
 
 cd() { builtin cd "$@" && printf "\033c" && ll; }
-pushd() { builtin pushd "$@"; ll; }
+pushd() { builtin pushd "$@" && printf "\033c"; ll; }
 mkcd() { mkdir -p "$1" && cd "$1"; }
 te() { touch "$1"; e "$1"; }
 

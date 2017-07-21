@@ -17,10 +17,7 @@
 # Aliases are command shortcuts
 [alias]
   co = checkout
-  com = checkout master
-  pom = push origin master
   br = branch
-  pum = pull upstream master
   a = add .
   puch = push
   re = remote -v
@@ -30,6 +27,7 @@
   see = "!gitsee"
   rr = "!git ls-files -dz | xargs -0 git rm"
   logo = log --oneline
+  compare = "!f() { [[ ! $# -eq 1 ]] && echo provide 1 branch name to compare against working branch || git rev-list --left-right --count $1...@; }; f"
 
   # lg is now a shortcut for a pretty log with short commit messages
   # See the log manpage: https://www.kernel.org/pub/software/scm/git/docs/git-log.html

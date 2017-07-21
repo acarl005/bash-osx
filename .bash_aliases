@@ -65,3 +65,5 @@ alias etc='etcdctl'
 alias sandbox-etc='etcdctl --ca-file ~/etcd-sandbox.cert --no-sync --peers "https://aws-us-east-1-portal.12.dblayer.com:10799,https://aws-us-east-1-portal.15.dblayer.com:11263" -u root:JZGSKAQDFQLPDBUZ'
 
 alias pirate='youtube-dl --extract-audio --audio-format mp3'
+alias probe='ffprobe -of json -show_streams -show_format'
+
