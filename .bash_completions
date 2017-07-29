@@ -1,11 +1,9 @@
 #!/bin/bash
 
 comp_foreman_start() {
-  if [[ -f Procfile ]]; then
-    if [[ $3 = start ]]; then
-      words=`cat Procfile | cut -d ':' -f1`
-      COMPREPLY=( $(compgen -W "$words" $2) )
-    fi
+  if [[ -f Procfile ]] && [[ $3 = start ]]; then
+    words=`cat Procfile | cut -d ':' -f1`
+    COMPREPLY=( $(compgen -W "$words" $2) )
   fi
 }
 complete -o default -F comp_foreman_start foreman
@@ -13,7 +11,7 @@ alias fs="foreman start"
 alias fr="foreman run"
 
 comp_fs() {
-  if [[ -f Procfile ]]; then
+  if [[ -f Procfile ]] && [[ $3 = fs ]]; then
     words=`cat Procfile | cut -d ':' -f1`
     COMPREPLY=( $(compgen -W "$words" $2) )
   fi
@@ -21,7 +19,7 @@ comp_fs() {
 complete -o default -F comp_fs fs
 
 comp_npm_run() {
-  if [[ -f package.json ]]; then
+  if [[ -f package.json ]] && [[ $3 = run ]]; then
 
     words=`node<<-NODE
       const scripts = require('./package.json').scripts
@@ -29,9 +27,20 @@ comp_npm_run() {
       console.log(list)
 NODE`
 
-    if [[ $3 = run ]]; then
-      COMPREPLY=( $(compgen -W "$words" $2) )
-    fi
+    COMPREPLY=( $(compgen -W "$words" $2) )
   fi
 }
 complete -o default -F comp_npm_run npm
+alias nr="npm run"
+
+comp_nr() {
+  if [[ -f package.json ]] && [[ $3 = nr ]]; then
+    words=`node<<-NODE
+      const scripts = require('./package.json').scripts
+      const list = Object.keys(scripts).join(' ')
+      console.log(list)
+NODE`
+    COMPREPLY=( $(compgen -W "$words" $2) )
+  fi
+}
+complete -o default -F comp_nr nr

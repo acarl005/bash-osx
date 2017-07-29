@@ -54,8 +54,6 @@ alias dm="docker-machine"
 alias fm=foreman
 alias ipy=ipython
 alias ns="npm start"
-alias nsd="npm run start-dev"
-alias nr="npm run"
 alias root='cd `git rev-parse --show-toplevel`'
 
 alias etcbkp='rm -rf ~/etcd-backup && etcdctl backup --data-dir ~/default.etcd --backup-dir ~/etcd-backup && tar -C ~ -cvzf etcd-backup.tar.gz etcd-backup; ls ~/etcd-backup.tar.gz'
