@@ -47,5 +47,5 @@
 
 
 [credential]
-	helper = osxkeychain
+  helper = osxkeychain
 

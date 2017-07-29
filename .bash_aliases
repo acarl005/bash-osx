@@ -19,11 +19,7 @@ for i in `seq 1 11`; do
 done
 
 alias e=$EDITOR
-# use installed version of vim instead of system default
-[[ -e /usr/local/bin/vim ]] && {
-  alias vim="/usr/local/bin/vim"
-  alias vi="/usr/local/bin/vim"
-}
+alias vi=vim
 
 # jump to commonly used directories
 alias desk="pushd $HOME/Desktop"
