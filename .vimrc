@@ -19,7 +19,7 @@ Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 
 Plugin 'Townk/vim-autoclose.git' " auto add matching bracket or quote when you type one
 "Plugin 'jiangmiao/auto-pairs' " auto add matching bracket or quote when you type one. has an annoying problem of skipping over the closing brace when i'm trying to actually insert one
-Plugin 'terryma/vim-multiple-cursors' " sublime-text-like mutli cursors
+Plugin 'terryma/vim-multiple-cursors' " sublime-text-like multi cursors
 Plugin 'tpope/vim-surround' " manipulates surrounding brackets and quotes
 Plugin 'tpope/vim-repeat' " adds . support for the vim-surround maps
 Plugin 'ctrlpvim/ctrlp.vim' " fuzzy searching for files
@@ -38,7 +38,6 @@ Plugin 'kchmck/vim-coffee-script'
 Plugin 'leafgarland/typescript-vim'
 Plugin 'elzr/vim-json' " better json highlighting 
 Plugin 'derekwyatt/vim-scala'
-Plugin 'vim-scripts/cool.vim'
 
 " a pretty status line 
 " requires installation of this font package on OSX:
@@ -153,7 +152,6 @@ au VimEnter * RainbowParenthesesToggle
 au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
-
 
 " dont hide double quotes using vim-json
 set conceallevel=0
