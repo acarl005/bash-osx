@@ -168,7 +168,7 @@ imap <nowait> ç console.log()<ESC>i
 " wrap in JSON.stringify (alt+j)
 imap <nowait> ∆ JSON.stringify(, null, 2)<ESC>2F,i
 imap <nowait> ß // eslint-disable-line
-imap <nowait> † require('util').inspect(, {depth: 10, color: true}))<ESC>2F,i
+imap <nowait> † require('util').inspect(, { depth: 10, color: true<C-c>f}a))<ESC>2F,i
 " pretty format for a JSON file. just press =j
 nmap =j :%!python -m json.tool<CR>
 " open new tab
