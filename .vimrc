@@ -87,7 +87,7 @@ runtime macros/matchit.vim
 
 " my favorite font. also includes customized unicode characters for making powerline look super dope
 set guifont=Inconsolata\ for\ Powerline:h15
-" tell powerline to use those custom characters
+" tell powerline to use those custom characters. they look super dope
 let g:Powerline_symbols = 'fancy'
 
 set encoding=utf-8
@@ -101,9 +101,9 @@ let mapleader = ','
 
 set showcmd " Display commands in the bottom right corner as they are typed
 set expandtab " convert tab to spaces
-set shiftwidth=2
-set tabstop=2
-set softtabstop=2
+set softtabstop=2 " how many spaces to insert for each <tab>
+set tabstop=2 " the width to display a <tab> character
+set shiftwidth=2 " used by commands like =, >, and < to know how much to indent
 "set relativenumber " line numbers are relative to where the cursor is (has performance issues on large files > 500 lines)
 set number " line numbers
 set autoindent
@@ -112,7 +112,7 @@ set ignorecase " searches are case insensitive
 set smartcase " searches become case sensitive when you enter capital letters
 set hlsearch " highlight the current search term
 set incsearch " highight search incrementally
-set clipboard=unnamed " the vim clipboard is be the same as the system clipboard
+set clipboard=unnamed " the vim clipboard is be the same as the system clipboard. requires vim to be compiled with the +clipboard option if you run :echo has('clipboard') and it returns 0, you need to re-install vim to make use of this
 set backspace=indent,eol,start " enable backspace button
 set scrolloff=15 " vim will automatically adjust viewport to leave at least 15 lines above and below cursor when possible
 set wildignore=*/node_modules/*,*.swp,*.zip,*/dist/*
@@ -168,7 +168,7 @@ imap <nowait> ç console.log()<ESC>i
 " wrap in JSON.stringify (alt+j)
 imap <nowait> ∆ JSON.stringify(, null, 2)<ESC>2F,i
 imap <nowait> ß // eslint-disable-line
-imap <nowait> † require('util').inspect(, {depth: 10, color: true}))<ESC>F,i
+imap <nowait> † require('util').inspect(, {depth: 10, color: true}))<ESC>2F,i
 " pretty format for a JSON file. just press =j
 nmap =j :%!python -m json.tool<CR>
 " open new tab
@@ -182,10 +182,10 @@ map <leader>' :s/"/'/g<CR>
 " strip double quotes from keys in JSON. useful when pasting JSON into a JS
 " file and the linter complains about unecessary quoting
 map <leader>j :s/^\(\s*\)"\(\w\+\)"\s*:/\1\2:/g<CR>
-" a more convenient save shortcut
-map <leader>w :w<CR>
-" a more convenient quit shorcut
-map <leader>q :q<CR>
+" a more convenient save shortcut. 'update' only writes the file if there are any changes
+map <leader>w :update<CR>
+" a more convenient quit shorcut. ZZ only writes the file if there are changes
+map <leader>q ZZ<CR>
 " dedent block and delete line with surrounding brackets
 map <leader>x <i{]}dd[{dd
 " add comma at the end
