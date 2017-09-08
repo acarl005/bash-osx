@@ -44,3 +44,18 @@ NODE`
   fi
 }
 complete -o default -F comp_nr nr
+
+comp_etcdctl() {
+  DIR=$(echo $2 | sed -E 's~[^/]*$~~')
+  WORDS=$(etcdctl ls -p $DIR | xargs -n 1 basename)
+  INPUT=$(basename "$2")
+  if [[ "$2" =~ /$ ]]; then
+    INPUT=""
+  fi
+  COMPREPLY=( $(compgen -P "$DIR" -W "$WORDS" "$INPUT") )
+}
+
+alias etc=etcdctl
+complete -o nospace -F comp_etcdctl etcdctl
+complete -o nospace -F comp_etcdctl etc
+

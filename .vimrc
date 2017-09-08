@@ -38,6 +38,7 @@ Plugin 'kchmck/vim-coffee-script'
 Plugin 'leafgarland/typescript-vim'
 Plugin 'elzr/vim-json' " better json highlighting 
 Plugin 'derekwyatt/vim-scala'
+Plugin 'exu/pgsql.vim' " postgres-specific SQL syntax
 
 " a pretty status line 
 " requires installation of this font package on OSX:
@@ -140,6 +141,9 @@ let g:syntastic_always_populate_loc_list = 0
 let g:syntastic_auto_loc_list = 0
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+
+" set default SQL dialect to postgres. used with 'exu/pgsql.vim'
+let g:sql_type_default = 'pgsql'
 
 " CtrlP options
 let g:ctrlp_map = '<c-p>'
