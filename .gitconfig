@@ -27,6 +27,7 @@
   see = "!gitsee"
   rr = "!git ls-files -dz | xargs -0 git rm"
   logo = log --oneline
+  logout = "!open https://help.github.com/articles/updating-credentials-from-the-osx-keychain/"
   compare = "!f() { [[ ! $# -eq 1 ]] && echo provide 1 branch name to compare against working branch || git rev-list --left-right --count $1...@; }; f"
 
   # lg is now a shortcut for a pretty log with short commit messages
