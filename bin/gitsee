@@ -1,16 +1,35 @@
-#!/usr/local/bin/node
+#!/bin/bash
 
-var exec = require('child_process').exec;
+usage() { echo "Usage: $0 [-p path] [-r remote]" 1>&2; exit 1; }
 
-var remote = process.argv[2] || 'origin';
-var re = new RegExp(remote + "\\s*(https://(github|gitlab|bitbucket)\\.com/(?:\\S+))(.git)?");
+while getopts ":p:r:" o; do
+    case "${o}" in
+        p)
+            [ -n "${OPTARG+1}" ] || usage
+            PATH_SUFFIX=${OPTARG}
+            ;;
+        r)
+            [ -n "${OPTARG+1}" ] || usage
+            REMOTE=${OPTARG}
+            ;;
+        *)
+            usage
+            ;;
+    esac
+done
 
-exec('git remote -v', function(err, out) {
-  try {
-    var url = out.match(re)[1];
-    exec('open ' + url);
-  } catch (err) {
-    console.error('\033[31mremote ' + remote + ' is not known')
-    process.exit(1)
-  }
-});
+REMOTE=${REMOTE:-origin}
+REMOTE_VERBOSE=$(git remote -v)
+BRANCH=$(git rev-parse --abbrev-ref HEAD)
+REPO=$([[ $REMOTE_VERBOSE =~ ${REMOTE}[[:space:]]+(https:\/\/|git@)github\.com(\:|\/)([^[:space:]]+)\.git? ]] && echo ${BASH_REMATCH[3]})
+REPO_URL=https://github.com/${REPO}
+PATH_PREFIX=$(git rev-parse --show-prefix)
+FULL_URL=${REPO_URL}/tree/${BRANCH}/${PATH_PREFIX}
+
+if [ -n "${PATH_SUFFIX+1}" ]; then
+  open $FULL_URL${PATH_SUFFIX}
+elif [ -z $PATH_PREFIX ]; then
+  open $REPO_URL
+else
+  open $FULL_URL
+fi
