@@ -245,6 +245,8 @@ man() {
 }
 
 if [[ `which pygmentize` ]]; then
+  export LESSOPEN="| pygmentize %s"
+  export LESS=" -R" 
   # overwrite cat command so that it uses pygments instead
   cat() {
     # only use color if the stdout points to the terminal
