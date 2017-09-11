@@ -6,7 +6,7 @@ alias cp='cp -iv'
 alias mv='mv -iv'
 alias mkdir='mkdir -pv'
 alias ls='ls -Gp'
-alias less='less -SXcmNiJ'
+alias less='less -SXcmNiJF'
 alias rn='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR"'
 
 # write the zsh commands for going up directories by typing a number of dots
@@ -45,6 +45,7 @@ alias chrome="open -a /Applications/Google\ Chrome.app/"
 alias u='echo -n `uuid` | pbcopy'
 alias pirate='youtube-dl --extract-audio --audio-format mp3'
 alias probe='ffprobe -of json -show_streams -show_format'
+alias r='r --no-save'
 
 alias dm="docker-machine"
 alias fm=foreman

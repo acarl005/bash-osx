@@ -1,5 +1,21 @@
 "*":
   core:
+    ignoredNames: [
+      ".git"
+      ".hg"
+      ".svn"
+      ".DS_Store"
+      "._*"
+      "Thumbs.db"
+      "desktop.ini"
+      "*.pyc"
+    ]
     telemetryConsent: "limited"
+  editor:
+    invisibles:
+      eol: " "
+    showInvisibles: true
   "exception-reporting":
     userId: "8bb1bede-d845-4c77-9500-44049ce21f88"
+  welcome:
+    showOnStartup: false
