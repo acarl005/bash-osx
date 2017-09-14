@@ -26,9 +26,15 @@ while getopts ":p:r:b:" o; do
   esac
 done
 
+# try to get the base URL from the git remote command
 REMOTE_VERBOSE=$(git remote -v)
-REPO=$([[ $REMOTE_VERBOSE =~ ${REMOTE}[[:space:]]+(https:\/\/|git@)(github|gitlab|bitbucket)\.com(\:|\/)([^[:space:]]+)\.git? ]] && echo ${BASH_REMATCH[4]})
-REPO_URL=https://github.com/${REPO}
+if [[ $REMOTE_VERBOSE =~ ${REMOTE}[[:space:]]+(https:\/\/|git@)(github|gitlab|bitbucket)\.com(\:|\/)([^[:space:]]+)\.git? ]]; then
+  REPO_URL=https://${BASH_REMATCH[2]}.com/${BASH_REMATCH[4]}
+else
+  echo unable to parse 
+  echo $REMOTE_VERBOSE
+  exit 1
+fi
 
 # check if the branch they want exists
 if git ls-remote --heads --exit-code "$REPO_URL" "$BRANCH" 1>/dev/null; then
@@ -38,12 +44,22 @@ else
   exit 1
 fi
 
+# get the subdirectory within the git repo
+# normally this command gets it
 PATH_PREFIX=$(git rev-parse --show-prefix)
+# unless they are running this script from a git alias, then you need to look at $GIT_PREFIX
+PATH_PREFIX="${PATH_PREFIX:-${GIT_PREFIX:-}}"
+
 FULL_URL=${REPO_URL}/tree/${BRANCH}/${PATH_PREFIX}
 
 if [ -n "${PATH_SUFFIX+1}" ]; then
   FULL_URL="$FULL_URL$PATH_SUFFIX"
 fi
 
-open $FULL_URL
+# open with MacOS or linux
+if [ `uname -s` = Darwin ]; then
+  open $FULL_URL
+else
+  google-chrome $FULL_URL
+fi
 
