@@ -29,13 +29,21 @@ done
 REMOTE_VERBOSE=$(git remote -v)
 REPO=$([[ $REMOTE_VERBOSE =~ ${REMOTE}[[:space:]]+(https:\/\/|git@)(github|gitlab|bitbucket)\.com(\:|\/)([^[:space:]]+)\.git? ]] && echo ${BASH_REMATCH[4]})
 REPO_URL=https://github.com/${REPO}
+
+# check if the branch they want exists
+if git ls-remote --heads --exit-code "$REPO_URL" "$BRANCH"; then
+  echo -e branch "\x1b[36m$BRANCH\x1b[0m" is in remote "\x1b[33m$REMOTE\x1b[0m"
+else
+  echo -e branch "\x1b[36m$BRANCH\x1b[0m" is not in remote "\x1b[33m$REMOTE\x1b[0m"
+  exit 1
+fi
+
 PATH_PREFIX=$(git rev-parse --show-prefix)
 FULL_URL=${REPO_URL}/tree/${BRANCH}/${PATH_PREFIX}
 
 if [ -n "${PATH_SUFFIX+1}" ]; then
-  open $FULL_URL${PATH_SUFFIX}
-elif [ -z $PATH_PREFIX ]; then
-  open $REPO_URL
-else
-  open $FULL_URL
+  FULL_URL="$FULL_URL$PATH_SUFFIX"
 fi
+
+open $FULL_URL
+
