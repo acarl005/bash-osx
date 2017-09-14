@@ -31,10 +31,10 @@ REPO=$([[ $REMOTE_VERBOSE =~ ${REMOTE}[[:space:]]+(https:\/\/|git@)(github|gitla
 REPO_URL=https://github.com/${REPO}
 
 # check if the branch they want exists
-if git ls-remote --heads --exit-code "$REPO_URL" "$BRANCH"; then
-  echo -e branch "\x1b[36m$BRANCH\x1b[0m" is in remote "\x1b[33m$REMOTE\x1b[0m"
+if git ls-remote --heads --exit-code "$REPO_URL" "$BRANCH" 1>/dev/null; then
+  echo -e branch "\x1b[36m$BRANCH\x1b[0m" is in remote "\x1b[32m$REMOTE\x1b[0m"
 else
-  echo -e branch "\x1b[36m$BRANCH\x1b[0m" is not in remote "\x1b[33m$REMOTE\x1b[0m"
+  echo -e branch "\x1b[36m$BRANCH\x1b[0m" is not in remote "\x1b[32m$REMOTE\x1b[0m"
   exit 1
 fi
 
