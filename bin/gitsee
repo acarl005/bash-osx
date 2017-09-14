@@ -1,27 +1,33 @@
 #!/bin/bash
 
-usage() { echo "Usage: $0 [-p path] [-r remote]" 1>&2; exit 1; }
+usage() { echo "Usage: $0 [-r remote] [-b branch] [-p path]" 1>&2; exit 1; }
 
-while getopts ":p:r:" o; do
-    case "${o}" in
-        p)
-            [ -n "${OPTARG+1}" ] || usage
-            PATH_SUFFIX=${OPTARG}
-            ;;
-        r)
-            [ -n "${OPTARG+1}" ] || usage
-            REMOTE=${OPTARG}
-            ;;
-        *)
-            usage
-            ;;
-    esac
+PATH_SUFFIX=
+REMOTE=origin
+BRANCH=$(git rev-parse --abbrev-ref HEAD)
+
+while getopts ":p:r:b:" o; do
+  case "${o}" in
+    p)
+      [ -n "${OPTARG+1}" ] || usage
+      PATH_SUFFIX=${OPTARG}
+      ;;
+    r)
+      [ -n "${OPTARG+1}" ] || usage
+      REMOTE=${OPTARG}
+      ;;
+    b)
+      [ -n "${OPTARG+1}" ] || usage
+      BRANCH=${OPTARG}
+      ;;
+    *)
+      usage
+      ;;
+  esac
 done
 
-REMOTE=${REMOTE:-origin}
 REMOTE_VERBOSE=$(git remote -v)
-BRANCH=$(git rev-parse --abbrev-ref HEAD)
-REPO=$([[ $REMOTE_VERBOSE =~ ${REMOTE}[[:space:]]+(https:\/\/|git@)github\.com(\:|\/)([^[:space:]]+)\.git? ]] && echo ${BASH_REMATCH[3]})
+REPO=$([[ $REMOTE_VERBOSE =~ ${REMOTE}[[:space:]]+(https:\/\/|git@)(github|gitlab|bitbucket)\.com(\:|\/)([^[:space:]]+)\.git? ]] && echo ${BASH_REMATCH[4]})
 REPO_URL=https://github.com/${REPO}
 PATH_PREFIX=$(git rev-parse --show-prefix)
 FULL_URL=${REPO_URL}/tree/${BRANCH}/${PATH_PREFIX}
