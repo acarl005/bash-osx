@@ -2,6 +2,11 @@
 
 usage() { echo "Usage: $0 [-r remote] [-b branch] [-p path]" 1>&2; exit 1; }
 
+BRANCH_COLOR="\x1b[36m"
+REMOTE_COLOR="\x1b[33m"
+SUFFIX_COLOR="\x1b[32m"
+RESET_COLOR="\x1b[0m"
+
 PATH_SUFFIX=
 REMOTE=origin
 BRANCH=$(git rev-parse --abbrev-ref HEAD)
@@ -26,6 +31,15 @@ while getopts ":p:r:b:" o; do
   esac
 done
 
+# open with MacOS or linux
+open_browser() {
+  if [ `uname -s` = Darwin ]; then
+    open $1
+  else
+    google-chrome $1
+  fi
+}
+
 # try to get the base URL from the git remote command
 REMOTE_VERBOSE=$(git remote -v)
 if [[ $REMOTE_VERBOSE =~ ${REMOTE}[[:space:]]+(https:\/\/|git@)(github|gitlab|bitbucket)\.com(\:|\/)([^[:space:]]+)\.git? ]]; then
@@ -38,10 +52,12 @@ fi
 
 # check if the branch they want exists
 if git ls-remote --heads --exit-code "$REPO_URL" "$BRANCH" 1>/dev/null; then
-  echo -e branch "\x1b[36m$BRANCH\x1b[0m" is in remote "\x1b[32m$REMOTE\x1b[0m"
+  echo -e branch "$BRANCH_COLOR$BRANCH$RESET_COLOR" is in remote "$REMOTE_COLOR$REMOTE$RESET_COLOR"
 else
-  echo -e branch "\x1b[36m$BRANCH\x1b[0m" is not in remote "\x1b[32m$REMOTE\x1b[0m"
-  exit 1
+  echo -e branch "$BRANCH_COLOR$BRANCH$RESET_COLOR" is not in remote "$REMOTE_COLOR$REMOTE$RESET_COLOR"
+  echo ignoring your options and opening $REPO_URL
+  open_browser $REPO_URL
+  exit 0
 fi
 
 # get the subdirectory within the git repo
@@ -56,10 +72,6 @@ if [ -n "${PATH_SUFFIX+1}" ]; then
   FULL_URL="$FULL_URL$PATH_SUFFIX"
 fi
 
-# open with MacOS or linux
-if [ `uname -s` = Darwin ]; then
-  open $FULL_URL
-else
-  google-chrome $FULL_URL
-fi
+echo opening $FULL_URL
+open_browser $FULL_URL
 
