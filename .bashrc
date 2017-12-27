@@ -57,6 +57,8 @@ else
   suggest screenfetch https://github.com/KittyKatt/screenFetch
 fi
 
+export NPM_TOKEN=00000000-0000-0000-0000-000000000000
+
 export NVM_DIR="/Users/andy/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && {
   . "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -114,6 +116,8 @@ fi
 PROMPT_COMMAND='EXIT=$?; echo -ne "\033]0;$(basename $(pwd))\007"; history -a; history -r; PS1="$(generate_prompt) ${reset_esc}";'
 export PS2='... '
 
+HISTSIZE=3000
+
 generate_prompt() {
   STATUS_BG=196
   STATUS_STR='✘ '
@@ -126,9 +130,6 @@ generate_prompt() {
   ENV_STR=
   if [[ $VIRTUAL_ENV ]]; then
     ENV_STR="${ENV_STR}🐍 "
-  fi
-  if [[ $DOCKER_MACHINE_NAME ]]; then
-    ENV_STR="${ENV_STR}🐳 "
   fi
   if [ ! -z $rvm_bin_path ]; then
     ENV_STR="${ENV_STR}💎 "
@@ -262,12 +263,8 @@ else
   suggest pygments http://pygments.org/download/
 fi
 
-docker-alias() {
-  ALIAS=`cat $HOME/.docker-aliases | grep -e "^$1"`
-  echo "Running the following command for alias \"$(echo $ALIAS | cut -d= -f1)\":"
-  COMMAND=`echo $ALIAS | cut -d= -f2`
-  echo $COMMAND
-  eval $COMMAND
+local-install() {
+  npm install $(npm pack "$1" | tail -1)
 }
 
 docker-kill() {

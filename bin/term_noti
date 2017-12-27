@@ -1,0 +1,8 @@
+#!/usr/bin/osascript
+
+tell application "System Events"
+    set activeApp to name of first application process whose frontmost is true
+    if "Terminal" is not in activeApp then
+        display notification "Command Completed" with title "Terminal"
+    end if
+end tell

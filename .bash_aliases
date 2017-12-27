@@ -6,7 +6,7 @@ alias cp='cp -iv'
 alias mv='mv -iv'
 alias mkdir='mkdir -pv'
 alias ls='ls -Gp'
-alias less='less -SXcmNiJF'
+alias less='less -SXcmiJF'
 alias rn='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR"'
 
 # write the zsh commands for going up directories by typing a number of dots
@@ -47,8 +47,8 @@ alias pirate='youtube-dl --extract-audio --audio-format mp3'
 alias probe='ffprobe -of json -show_streams -show_format'
 alias r='r --no-save'
 alias grip='grip -b'
+alias https='http --default-scheme=https'
 
-alias dm="docker-machine"
 alias fm=foreman
 alias ipy=ipython
 alias ns="npm start"
@@ -58,7 +58,7 @@ alias rstudio='open -a rstudio'
 
 alias etcbkp='rm -rf ~/etcd-backup && etcdctl backup --data-dir ~/default.etcd --backup-dir ~/etcd-backup && tar -C ~ -cvzf etcd-backup.tar.gz etcd-backup; ls ~/etcd-backup.tar.gz'
 alias sandbox-etc='etcdctl --ca-file ~/etcd-sandbox.cert --no-sync --peers "https://aws-us-east-1-portal.12.dblayer.com:10799,https://aws-us-east-1-portal.15.dblayer.com:11263" -u root:JZGSKAQDFQLPDBUZ'
-alias bastion='ssh -A ec2-user@bastion.stems.co'
+alias bastion='ssh -A ec2-user@54.208.41.126'
 
 #typos
 alias tit=git

@@ -13,9 +13,10 @@
     telemetryConsent: "limited"
     themes: [
       "one-dark-ui"
-      "pure-syntax"
+      "atom-dark-syntax"
     ]
   editor:
+    fontSize: 24
     invisibles:
       eol: " "
     showInvisibles: true
@@ -24,5 +25,10 @@
   "ide-flowtype":
     tryFlowBin: true
   "linter-ui-default": {}
+  termination:
+    style:
+      fontFamily: "Inconsolata for Powerline"
+  "vim-mode-plus":
+    notifiedCoffeeScriptNoLongerSupportedToExtendVMP: true
   welcome:
     showOnStartup: false
