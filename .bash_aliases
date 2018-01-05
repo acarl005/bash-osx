@@ -51,6 +51,8 @@ alias https='http --default-scheme=https'
 
 alias fm=foreman
 alias ipy=ipython
+alias py=python
+alias py3=python3
 alias ns="npm start"
 #alias root='cd `git rev-parse --show-toplevel`'
 alias root='cd $(git root)'

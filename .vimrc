@@ -142,7 +142,7 @@ set laststatus=2 " always show the status bar
 let g:indentLine_color_term = 236
 let g:indentLine_char = '𝄄'
 " syntastic options
-let g:syntastic_javascript_checkers = ['eslint']
+"let g:syntastic_javascript_checkers = ['eslint']
 "let g:syntastic_javascript_eslint_exec = 'eslint_d'
 let g:syntastic_python_checkers = ['pyflakes']
 "let g:syntastic_mode_map = { "mode": "passive" }
